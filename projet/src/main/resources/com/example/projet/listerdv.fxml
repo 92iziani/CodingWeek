@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -27,23 +27,34 @@
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <Text layoutX="55.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes Rendez-Vous" wrappingWidth="146.5">
+      <Text layoutX="227.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes Rendez-Vous" wrappingWidth="146.5">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TilePane layoutX="55.0" layoutY="128.0" prefHeight="200.0" prefWidth="200.0">
+      <TilePane layoutX="187.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane hbarPolicy="NEVER" prefHeight="189.0" prefWidth="227.0" vbarPolicy="ALWAYS">
+               <content>
+                  <VBox spacing="10.0">
                      <children>
-                        <VBox layoutX="14.0" prefHeight="200.0" prefWidth="100.0" />
+                        <AnchorPane prefHeight="50.0" prefWidth="200.0" />
+                        <AnchorPane prefHeight="50.0" prefWidth="200.0" />
+                        <AnchorPane prefHeight="50.0" prefWidth="200.0" />
                      </children>
-                  </AnchorPane>
-              </content>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </content>
             </ScrollPane>
          </children>
       </TilePane>
+      <ImageView fitHeight="21.0" fitWidth="35.0" layoutX="27.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@plus.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="63.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau" />
    </children>
 </AnchorPane>
