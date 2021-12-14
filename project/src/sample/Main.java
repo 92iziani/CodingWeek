@@ -20,10 +20,6 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 600, 500));
         primaryStage.show();
-        Creneau c = new Creneau("aa", "13h13");
-        Prof p = new Prof();
-        Eleve e = new Eleve();
-        RDV r = new RDV();
     }
 
 

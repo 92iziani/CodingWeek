@@ -1,3 +1,5 @@
+package sample.Controleur;
+
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,8 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
-import modele.Creneau;
-import modele.Prof;
+import sample.modele.Creneau;
+import sample.modele.Prof;
+
 
 public class vuePriseRDVEtudiantController implements Initializable{
 

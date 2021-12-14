@@ -13,12 +13,12 @@ public class listerRDVProfControler {
 
     public void addRDVenattente(){
         Circle circle = new Circle(0.0, 0.0, 10);
-        this.vboxRDVAttente.getChildren().add(circle);
+        //this.vboxRDVAttente.getChildren().add(circle);
     }
 
     public void closeApplication(){
-        Stage stage = (Stage) close.getScene().getWindow();
-        stage.close();
+        //Stage stage = (Stage) close.getScene().getWindow();
+        //stage.close();
     }
 
 }
