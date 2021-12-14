@@ -9,9 +9,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.stage.Stage;
 import sample.modele.Creneau;
 import sample.modele.Prof;
 
@@ -29,6 +31,8 @@ public class vuePriseRDVEtudiantController implements Initializable{
     private ChoiceBox<String> heureChoicebox;
     @FXML
     private DatePicker dateChoice;
+    @FXML
+    private Button quitterButton;
 
     public static String cc;
 
@@ -43,6 +47,11 @@ public class vuePriseRDVEtudiantController implements Initializable{
     private void onDatepicker(ActionEvent e){
         updateHeureChoicebox();
         vuePriseRDVEtudiantController.cc = "hello";
+    }
+
+    public void closeApplication(){
+        Stage stage = (Stage) quitterButton.getScene().getWindow();
+        stage.close();
     }
 
     private void updateDatepicker(){
