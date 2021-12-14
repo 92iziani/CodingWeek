@@ -3,14 +3,18 @@ package sample.Controleur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,6 +34,10 @@ public class LoginController   {
     private Button ok;
     @FXML
     private PasswordField password;
+
+    @FXML
+
+    private Button close;
 
     @FXML
     protected void login() {
@@ -84,6 +92,18 @@ public class LoginController   {
             } 
         }
 
+    public void closeApplication(){
+        Stage stage = (Stage) close.getScene().getWindow();
+        stage.close();
+    }
+
+    public void profTemp() throws IOException {
+        Stage stage = sample.Main.stage;
+        Parent root = FXMLLoader.load(getClass().getResource("../view/listerdvProf.fxml"));
+        stage.setScene(new Scene(root, 600, 500));
+
+
+    }
 
 }
 

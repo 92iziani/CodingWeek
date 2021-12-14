@@ -37,7 +37,7 @@ public class RDV {
         return eId;
     }
 
-    public void seteId(String patId) {
+    public void seteId(String eId) {
         this.eId = eId;
     }
 
