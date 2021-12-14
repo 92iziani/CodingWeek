@@ -2,6 +2,7 @@ package sample.Controleur;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -9,11 +10,19 @@ import sample.modele.RDV;
 
 public class listerRDVProfControler {
 
+    @FXML
+    VBox vboxRDVAttente;
+
+    @FXML
+    Button close;
 
 
     public void addRDVenattente(){
-        Circle circle = new Circle(0.0, 0.0, 10);
-        this.vboxRDVAttente.getChildren().add(circle);
+        VBox v = new VBox();
+        RDV r = new RDV();
+        v.getChildren().addAll(new Label(r.geteId()));
+        this.vboxRDVAttente.getChildren().add(v);
+
     }
 
     public void closeApplication(){
