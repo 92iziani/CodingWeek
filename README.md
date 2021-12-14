@@ -12,6 +12,9 @@ Ahmed ZIANI
 Update Mardi 14 18h :
 Pour utiliser l'appli :
 
+Nous n'arrivions pas initiallment à exécuter le jar. Nous avons trouvé une commande pour l'exécuter cependant un problème de path rend l'utilisation partielle. Il est cependant parfaitement exécutable via InteliJ en lançant le main 
+/project/src/sample/Main.java
+
 -Page de login
 Login pour passer sur le profil étudiant :
 id : charoy
