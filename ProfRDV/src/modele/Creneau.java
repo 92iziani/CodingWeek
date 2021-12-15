@@ -14,6 +14,12 @@ public class Creneau {
         this.heure = heure;
     }
 
+    public Creneau(String date2, String heure2) {
+        String[] date = date2.split("/");
+        this.date = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
+        this.heure = heure2;
+    }
+
     public LocalDate getDate() {
         return date;
     }

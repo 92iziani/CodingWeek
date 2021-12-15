@@ -40,4 +40,5 @@ public class CreneauxUsuels {
     public void setHeureFin(String heureFin) {
         this.heureFin = heureFin;
     }
+
 }

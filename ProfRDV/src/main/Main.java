@@ -9,7 +9,7 @@ import modele.User;
 
 public class Main extends Application {
     public static Stage stage;
-    static User user = new User();
+    public static User user = new User();
 
     @Override
     public void start(Stage primaryStage) throws Exception{

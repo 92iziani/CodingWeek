@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListRdvController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListRdvEtudiantController">
    <children>
       <ImageView fitHeight="77.0" fitWidth="200.0" layoutX="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../photo/logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="close" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeApplication" text="Quitter" />
+      <Button fx:id="close" layoutX="532.0" layoutY="14.0" mnemonicParsing="false"  text="Quitter" />
       <MenuButton layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="Outils">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
@@ -54,7 +54,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="plus" layoutX="184.0" layoutY="104.0" mnemonicParsing="false" onAction="#changeScene" text="ajouter">
+      <Button fx:id="plus" onAction="#gotoPriseRDVEleve" layoutX="184.0" layoutY="104.0" mnemonicParsing="false"  text="ajouter">
          <graphic>
             <ImageView fitHeight="33.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>

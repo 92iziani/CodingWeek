@@ -1,13 +1,17 @@
 package controller;
 
-import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ResourceBundle;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -16,10 +20,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import modele.Eleve;
+import modele.Prof;
+import modele.User;
 
 
-public class LoginController   {
+public class LoginController  implements Initializable {
 
+     User user = main.Main.user;
     Connection connection = null;
     PreparedStatement pst;
     ResultSet rs;
@@ -32,48 +40,45 @@ public class LoginController   {
     @FXML
     private PasswordField password;
 
-    @FXML
 
-    private Button close;
 
     @FXML
-    protected void login() {
-
+    public  void login(ActionEvent event) {
         String uname = login.getText();
         String pass = password.getText();
 
-        if (uname.equals("") && pass.equals("")) {
+        if (uname.equals("") && pass.equals("")){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Champs vides ");
             alert.showAndWait();
             login.setText("");
             password.setText("");
-            login.requestFocus();
-        }
-
-             try {
+            login.requestFocus(); }
+        
+             try{
                 Class.forName("org.sqlite.JDBC");
-                connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data.db" );
-                pst = connection.prepareStatement("select * from users where login=(?) and password=(?)");
+                connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
+                pst = connection.prepareStatement("select * from users where Login=(?) and Password=(?)");
                 pst.setString(1,uname);
                 pst.setString(2,pass);
 
                 rs = pst.executeQuery();
 
-                if (rs.next()) {
+                 if (rs.next()) {
+                    if(rs.getString("Type").equals("Etudiant")){
+                        this.user.setEleve(new Eleve(rs.getString("uId"),rs.getString("Nom"),rs.getString("Email")));
+                    } else{
+                    if(rs.getString("Type").equals("Professeur")){
+                        this.user.setProf(new Prof(rs.getString("uId"),rs.getString("Nom"),rs.getString("Email"),null));
+                    }
+                    }
+                connection.close();
+                Stage stage = main.Main.getStage();
+                Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/listerdv-2.fxml"));
+                stage.setScene(new Scene(fxmlLoader, 600, 500));
+                 }
 
-                    System.out.println("found it");
-                    /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("Utilisateur trouvé! ");
-                    alert.showAndWait(); */
-                    connection.close();
-                    AnchorPane pane;
-                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/listerdv-2.fxml"));
-                pane = fxmlLoader.load();
-                MainContext.getChildren().setAll(pane);
-                }
-                else {
-
+                 else {
                     System.out.println("not exist");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText("Utilisateur non trouvé ");
@@ -81,21 +86,28 @@ public class LoginController   {
                     login.setText("");
                     password.setText("");
                     login.requestFocus();
-                }
+                } 
             }
-            catch (Exception e) {
-                System.out.println(""+e.getMessage());
-            } 
+            
+            catch (Exception e){
+                System.out.println(""+e.getMessage()); }
+             
         }
 
-    public void closeApplication() {
-        Stage stage = (Stage) close.getScene().getWindow();
-        stage.close();
+    @FXML
+    public void closeApplication(ActionEvent e){
+        Platform.exit();
+    }
+    
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // TODO Auto-generated method stub
+        System.out.println(user.getTest());
     }
 
-    public void profTemp() throws IOException {
-        Stage stage = main.Main.stage;
-        Parent root = FXMLLoader.load(getClass().getResource("../view/listerdvProf.fxml"));
-        stage.setScene(new Scene(root, 600, 500));
-    }
+
+        
+
 }
+

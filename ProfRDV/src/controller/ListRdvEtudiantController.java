@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,10 +9,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import modele.Creneau;
 import modele.RDV;
 import modele.User;
@@ -76,15 +83,25 @@ public class ListRdvEtudiantController   implements Initializable   {
         
     }
 
+    @FXML
+    public void closeApplication(ActionEvent e){
+        Platform.exit();
+    }
+
+    @FXML
+    public void gotoPriseRDVEleve(ActionEvent e) throws IOException{
+        Stage stage = main.Main.getStage();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/priserdv.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(this.user.getTest());
         try{
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection( "jdbc:sqlite:data-2.db" );
+            connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
             pst = connection.prepareStatement("select * from rdv where eId=(?) and Etat=(?)" );
             String temp = this.user.eleve.geteId();
-            System.out.println(temp);
             pst.setString(1,temp);
 
             pst.setString(2,"Confirme");
@@ -93,7 +110,6 @@ public class ListRdvEtudiantController   implements Initializable   {
 
            
         while (rs.next()) {
-            System.out.println("ffff");
 
             String rid = rs.getString("rId");
             String pID = rs.getString("pId");
@@ -119,10 +135,9 @@ public class ListRdvEtudiantController   implements Initializable   {
 //////////// REMPLISSAGE DEUXIEME TABLE
         try{
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection( "jdbc:sqlite:data-2.db" );
+            connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
             pst2 = connection.prepareStatement("select * from rdv where eId=(?) and Etat=(?)" );
             String temp2 = this.user.eleve.geteId();
-            System.out.println(temp2);
             pst2.setString(1,temp2);
             pst2.setString(2,"En attente");
 

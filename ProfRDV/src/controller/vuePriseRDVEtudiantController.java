@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -9,7 +10,10 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DateCell;
@@ -34,6 +38,7 @@ public class vuePriseRDVEtudiantController implements Initializable{
     @FXML
     private Button quitterButton;
 
+    // FONCTIONS FXML
     @FXML
     private void onProfChoicebox(ActionEvent e){
         updateHeureChoicebox();
@@ -45,6 +50,21 @@ public class vuePriseRDVEtudiantController implements Initializable{
         updateHeureChoicebox();
     }
 
+    @FXML
+    private void envoyerButton(ActionEvent e) throws IOException{
+        // Check si le prof, la date et l'heure sont choisis
+        gotoListerdv();
+        // Ajouter rdv à la bd
+        // update modele
+    }
+
+    private void gotoListerdv() throws IOException {
+        Stage stage = main.Main.getStage();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/listerdv-2.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
+    }
+
+    // AUTRES FONCTIONS
     public void closeApplication(){
         Stage stage = (Stage) quitterButton.getScene().getWindow();
         stage.close();

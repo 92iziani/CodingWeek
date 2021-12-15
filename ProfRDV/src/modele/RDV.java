@@ -4,19 +4,19 @@ public class RDV {
     private String rId;
     private String eId;
     private String pId;
-    private Boolean etat;
-    private CreneauxUsuels creneau;
+    private String etat;
+    private Creneau creneau;
     private String motif;
 
     public RDV() {
         this.rId = "daSilva";
         this.eId = "daSilva";
         this.pId = "daSilva";
-        this.etat = false;
+        this.etat = "en attente";
         this.motif = "daSilva";
     }
 
-    public RDV(String rId, String eId, String pId, Boolean etat, CreneauxUsuels creneau, String motif) {
+    public RDV(String rId, String eId, String pId, String etat, Creneau creneau, String motif) {
         this.rId = rId;
         this.eId = eId;
         this.pId = pId;
@@ -49,11 +49,11 @@ public class RDV {
         this.pId = pId;
     }
 
-    public Boolean getEtat() {
+    public String getEtat() {
         return etat;
     }
 
-    public void setEtat(Boolean etat) {
+    public void setEtat(String etat) {
         this.etat = etat;
     }
 
@@ -65,11 +65,11 @@ public class RDV {
         this.motif = motif;
     }
 
-    public CreneauxUsuels getCreneau() {
+    public Creneau getCreneau() {
         return creneau;
     }
 
-    public void setCreneau(CreneauxUsuels creneau) {
+    public void setCreneau(Creneau creneau) {
         this.creneau = creneau;
     }
 }
