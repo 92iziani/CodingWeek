@@ -1,7 +1,11 @@
+package sample.modele;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.modele.Eleve;
+import sample.modele.Prof;
 
 import java.io.IOException;
 import java.util.Observable;
@@ -9,7 +13,7 @@ import java.util.Observable;
 
 public class User extends Observable{
 
-    Eleve eleve;
+     Eleve eleve;
      Prof prof;
      String test = "hello";
 
