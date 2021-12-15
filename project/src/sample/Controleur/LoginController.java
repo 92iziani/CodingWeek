@@ -40,6 +40,9 @@ public class LoginController   {
     private Button close;
 
     @FXML
+    private Button admin ;
+
+    @FXML
     protected void login() {
 
         String uname = login.getText();
@@ -95,6 +98,14 @@ public class LoginController   {
     public void closeApplication(){
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();
+    }
+
+    public void adminTP() throws IOException {
+        Stage stage = sample.Main.stage;
+        Parent root = FXMLLoader.load(getClass().getResource("../view/AdminPagev2.fxml"));
+        stage.setScene(new Scene(root, 600, 500));
+
+
     }
 
     public void profTemp() throws IOException {
