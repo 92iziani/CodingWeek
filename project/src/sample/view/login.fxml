@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="MainContext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controleur.LoginController">
+   <children>
+      <ImageView fitHeight="113.0" fitWidth="315.0" layoutX="146.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../photo/logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="64.0" layoutY="183.0" text="Identifiez-vous">
+         <font>
+            <Font name="System Bold Italic" size="17.0" />
+         </font>
+      </Label>
+      <Text layoutX="219.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login : " />
+      <Text layoutX="180.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe :" />
+      <TextField fx:id="login" layoutX="267.0" layoutY="242.0" promptText="Entrez votre login" />
+      <Button fx:id="ok" layoutX="451.0" layoutY="317.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="79.0" text="OK" />
+      <PasswordField fx:id="password" layoutX="267.0" layoutY="279.0" promptText="Entrez votre mot de passe" />
+      <Button fx:id="close" layoutX="460.0" layoutY="44.0" mnemonicParsing="false" onAction="#closeApplication" prefHeight="34.0" prefWidth="79.0" text="Quitter" />
+      <Button fx:id="profTemp" layoutX="236.0" layoutY="321.0" mnemonicParsing="false" onAction="#profTemp" text="Prof Temporaire" />
+      <Button fx:id="admin" layoutX="68.0" layoutY="321.0" mnemonicParsing="false" onAction="#adminTP" text="AdminTemporaire" />
+   </children>
+</AnchorPane>
