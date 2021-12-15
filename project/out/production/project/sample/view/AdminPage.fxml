@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controleur.ListRdvController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controleur.AdminPageController">
    <children>
       <ImageView fitHeight="77.0" fitWidth="200.0" layoutX="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,7 +20,7 @@
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <Text layoutX="37.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes Rendez-Vous" textAlignment="CENTER" wrappingWidth="146.5">
+      <Text layoutX="48.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etudiants" textAlignment="CENTER" wrappingWidth="132.5">
          <font>
             <Font size="18.0" />
          </font>
@@ -49,12 +49,12 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Text layoutX="316.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rendez-vous en attente" textAlignment="CENTER" wrappingWidth="146.5">
+      <Text layoutX="316.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professeurs" textAlignment="CENTER" wrappingWidth="146.5">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="plus" layoutX="184.0" layoutY="104.0" mnemonicParsing="false" onAction="#changeScene" text="ajouter">
+      <Button fx:id="plus" layoutX="181.0" layoutY="78.0" mnemonicParsing="false" onAction="#changeSceneAjoutEleve" prefHeight="30.0" prefWidth="98.0" text="ajouter">
          <graphic>
             <ImageView fitHeight="33.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -62,5 +62,32 @@
                </image>
             </ImageView>
          </graphic></Button>
+      <Button fx:id="plus1" layoutX="452.0" layoutY="78.0" mnemonicParsing="false" onAction="#changeSceneAjoutProf" prefHeight="30.0" prefWidth="98.0" text="ajouter">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../photo/plus.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="moins1" layoutX="181.0" layoutY="114.0" mnemonicParsing="false" onAction="#changeSceneEnleverEleve" prefHeight="30.0" prefWidth="98.0" text="enlever">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../photo/Moins.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="moins2" layoutX="452.0" layoutY="114.0" mnemonicParsing="false" onAction="#changeSceneEnleverProf" prefHeight="30.0" prefWidth="98.0" text="enlever">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../photo/Moins.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

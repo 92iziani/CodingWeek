@@ -1,7 +1,11 @@
+package sample.Controleur;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,6 +25,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javafx.stage.Stage;
+import sample.modele.RDV;
+import sample.modele.Creneau;
 
 
 
@@ -45,6 +53,14 @@ public class ListRdvController  implements Initializable   {
 
     @FXML
     VBox vbox2;
+
+    @FXML
+    private Button close;
+
+    public void closeApplication(){
+        Stage stage = (Stage) close.getScene().getWindow();
+        stage.close();
+    }
 
     private void affiche1(ArrayList<RDV> rdv1){
         for (RDV rdv : rdv1){
@@ -97,7 +113,7 @@ public class ListRdvController  implements Initializable   {
         
         try{
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection( "jdbc:sqlite:data.db" );
+            connection = DriverManager.getConnection( "jdbc:sqlite:src/sample/Database/data.db" );
             pst = connection.prepareStatement("select * from rdv where eId=(?) and etat=(?)" );
             pst.setString(1,"1");
             pst.setString(2,"confirmé");
@@ -116,9 +132,9 @@ public class ListRdvController  implements Initializable   {
             String etat = rs.getString("etat"); 
             String date = rs.getString("date");
             String heure = rs.getString("heure");
-            Creneau creneau = new Creneau(date,heure);
-            RDV rdv = new RDV(rid,eID,pID,etat,creneau,motif);
-            rdv1.add(rdv);
+            //Creneau creneau = new Creneau(date,heure);
+            //RDV rdv = new RDV(rid,eID,pID,etat,creneau,motif);
+            //rdv1.add(rdv);
             
 
         }
@@ -132,7 +148,7 @@ public class ListRdvController  implements Initializable   {
 //////////// REMPLISSAGE DEUXIEME TABLE
         try{
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection( "jdbc:sqlite:data.db" );
+            connection = DriverManager.getConnection( "jdbc:sqlite:src/sample/Database/data.db" );
             pst2 = connection.prepareStatement("select * from rdv where eId=(?) and etat=(?)" );
             pst2.setString(1,"1");
             pst2.setString(2,"en attente");
@@ -150,9 +166,9 @@ public class ListRdvController  implements Initializable   {
             String etat = rs2.getString("etat"); 
             String date = rs2.getString("date");
             String heure = rs2.getString("heure");
-            Creneau creneau = new Creneau(date,heure);
-            RDV rdv = new RDV(rid,eID,pID,etat,creneau,motif);
-            rdv2.add(rdv);
+            //Creneau creneau = new Creneau(date,heure);
+            //RDV rdv = new RDV(rid,eID,pID,etat,creneau,motif);
+            //rdv2.add(rdv);
             
 
         }
@@ -165,7 +181,14 @@ public class ListRdvController  implements Initializable   {
     }
 
 
+    public void changeScene() throws IOException {
+        Stage stage = sample.Main.stage;
+        Parent root = FXMLLoader.load(getClass().getResource("../view/priserdv.fxml"));
+        stage.setTitle("Hello World");
+        stage.setScene(new Scene(root, 600, 500));
 
+
+    }
 
     }
 

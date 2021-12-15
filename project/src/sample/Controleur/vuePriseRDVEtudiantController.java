@@ -1,6 +1,7 @@
 package sample.Controleur;
 
 import java.net.URL;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +15,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
-import sample.modele.Creneau;
+import sample.modele.CreneauxUsuels;
 import sample.modele.Prof;
 
 
@@ -22,7 +23,6 @@ public class vuePriseRDVEtudiantController implements Initializable{
 
     // AUTRES
     ArrayList<Prof> profs = new ArrayList<Prof>();
-    ArrayList<String> heuresJournée = new ArrayList<String>();
 
     // CONTROLES FXML
     @FXML 
@@ -34,19 +34,15 @@ public class vuePriseRDVEtudiantController implements Initializable{
     @FXML
     private Button quitterButton;
 
-    public static String cc;
-
     @FXML
     private void onProfChoicebox(ActionEvent e){
         updateHeureChoicebox();
         updateDatepicker();
-        vuePriseRDVEtudiantController.cc = "hello";
     }
 
     @FXML
     private void onDatepicker(ActionEvent e){
         updateHeureChoicebox();
-        vuePriseRDVEtudiantController.cc = "hello";
     }
 
     public void closeApplication(){
@@ -69,8 +65,8 @@ public class vuePriseRDVEtudiantController implements Initializable{
                 }
 
                 private boolean isInvalidDate(LocalDate date) {
-                    for (Creneau creneau : profSelected.getCreneaux()){
-                        if (date.compareTo(creneau.getDate()) == 0){
+                    for (CreneauxUsuels creneau : profSelected.getCreneaux()){
+                        if (date.getDayOfWeek() == creneau.getJour()){
                             return false;
                         }
                     } 
@@ -85,13 +81,28 @@ public class vuePriseRDVEtudiantController implements Initializable{
             heureChoicebox.getItems().clear();
             Prof profSelected = profByName(profChoicebox.getSelectionModel().getSelectedItem());
             if (profSelected.getCreneaux()!=null && dateChoice.getValue()!=null){
-                for (Creneau creneau : profSelected.getCreneaux()){
-                    if (creneau.getDate().equals(dateChoice.getValue())){
-                        heureChoicebox.getItems().add(creneau.getHeure());
+                for (CreneauxUsuels creneau : profSelected.getCreneaux()){
+                    if (creneau.getJour().equals(dateChoice.getValue().getDayOfWeek())){
+                        heureChoicebox.getItems().addAll(horaires(creneau));
                     }
                 } 
+            } 
+        }
+    }
+
+    private ArrayList<String> horaires(CreneauxUsuels creneau) {
+        ArrayList<String> horaires = new ArrayList<String>();
+        String[] heureDebut = creneau.getHeureDebut().split("h");
+        String[] heureFin = creneau.getHeureFin().split("h");
+
+        for (int i = Integer.parseInt(heureDebut[0])*60 +  Integer.parseInt(heureDebut[1])  ; i < Integer.parseInt(heureFin[0])*60 + Integer.parseInt(heureFin[1]) - 10; i = i+10) {
+            if (i%60 == 0){
+                horaires.add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
+            } else {
+                horaires.add(String.valueOf(i/60)+":"+String.valueOf(i%60));
             }
         }
+        return horaires;
     }
 
     // INITIALISE
@@ -102,9 +113,6 @@ public class vuePriseRDVEtudiantController implements Initializable{
         for (Prof prof : profs){
             profChoicebox.getItems().add(prof.getpName());
         }
-        for (String heure : heuresJournée){
-            heureChoicebox.getItems().add(heure);
-        } 
     }
 
     
@@ -112,47 +120,12 @@ public class vuePriseRDVEtudiantController implements Initializable{
     //AUTRES FONCTIONS
     private void createData() {
         // AJOUT DES PROFS
-        Prof prof1 = new Prof("0", "Dudu", "dudu@gmail.com", new ArrayList<Creneau>(Arrays.asList(new Creneau(LocalDate.of(2021, 12, 25), "8h00"),new Creneau(LocalDate.now(), "8h10"))));
-        Prof prof2 = new Prof("1", "Didi", "didi@gmail.com", new ArrayList<Creneau>(Arrays.asList(new Creneau(LocalDate.now(), "14h00"),new Creneau(LocalDate.now(), "14h10"))));
+        Prof prof1 = new Prof("0", "Dudu", "dudu@gmail.com", new ArrayList<CreneauxUsuels>(Arrays.asList(new CreneauxUsuels(DayOfWeek.MONDAY, "8h00", "12h00"),new CreneauxUsuels(DayOfWeek.TUESDAY, "8h00", "12h00"))));
+        Prof prof2 = new Prof("1", "Didi", "didi@gmail.com", new ArrayList<CreneauxUsuels>(Arrays.asList(new CreneauxUsuels(DayOfWeek.WEDNESDAY, "14h00", "18h00"),new CreneauxUsuels(DayOfWeek.FRIDAY, "16h00", "17h30"))));
+        Prof prof3 = new Prof("2", "Dada", "dada@gmail.com", new ArrayList<CreneauxUsuels>());
         profs.add(prof1);
         profs.add(prof2);
-        // CREATION DES CRENEAUXX HORAIRES : 8h00-11h40 et 14h00-17h40
-        for (int i = 8;i<11; i++){
-            for (int j = 0; j<60; j=j+10){
-                if (j==0){
-                    heuresJournée.add(String.valueOf(i)+":0"+String.valueOf(j));
-                } else {
-                    heuresJournée.add(String.valueOf(i)+":"+String.valueOf(j));
-                }
-            }
-        }
-        for (int i = 11;i<12; i++){
-            for (int j = 0; j<50; j=j+10){
-                if (j==0){
-                    heuresJournée.add(String.valueOf(i)+":0"+String.valueOf(j));
-                } else {
-                    heuresJournée.add(String.valueOf(i)+":"+String.valueOf(j));
-                }
-            }
-        }
-        for (int i = 14;i<17; i++){
-            for (int j = 0; j<60; j=j+10){
-                if (j==0){
-                    heuresJournée.add(String.valueOf(i)+":0"+String.valueOf(j));
-                } else {
-                    heuresJournée.add(String.valueOf(i)+":"+String.valueOf(j));
-                }
-            }
-        }
-        for (int i = 17;i<18; i++){
-            for (int j = 0; j<50; j=j+10){
-                if (j==0){
-                    heuresJournée.add(String.valueOf(i)+":0"+String.valueOf(j));
-                } else {
-                    heuresJournée.add(String.valueOf(i)+":"+String.valueOf(j));
-                }
-            }
-        }
+        profs.add(prof3);
     }
 
     private Prof profByName(String name) {
