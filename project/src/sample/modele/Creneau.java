@@ -1,22 +1,24 @@
 package sample.modele;
 
+import java.time.LocalDate;
+
 public class Creneau {
-    private String date;
+    private LocalDate date;
     private String heure;
 
     public Creneau() {
     }
 
-    public Creneau(String date, String heure) {
+    public Creneau(LocalDate date, String heure) {
         this.date = date;
         this.heure = heure;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

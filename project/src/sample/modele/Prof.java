@@ -6,12 +6,12 @@ public class Prof {
     private String pId;
     private String pName;
     private String pEmail;
-    private ArrayList<Creneau> creneaux;
+    private ArrayList<CreneauxUsuels> creneaux;
 
     public Prof() {
     }
 
-    public Prof(String pId, String pName, String pEmail, ArrayList<Creneau> creneaux) {
+    public Prof(String pId, String pName, String pEmail, ArrayList<CreneauxUsuels> creneaux) {
         this.pId = pId;
         this.pName = pName;
         this.pEmail = pEmail;
@@ -42,11 +42,11 @@ public class Prof {
         this.pEmail = pEmail;
     }
 
-    public ArrayList<Creneau> getCreneaux() {
+    public ArrayList<CreneauxUsuels> getCreneaux() {
         return creneaux;
     }
 
-    public void setCreneaux(ArrayList<Creneau> creneaux) {
+    public void setCreneaux(ArrayList<CreneauxUsuels> creneaux) {
         this.creneaux = creneaux;
     }
 }
