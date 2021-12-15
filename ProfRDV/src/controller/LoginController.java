@@ -53,7 +53,7 @@ public class LoginController   {
 
              try {
                 Class.forName("org.sqlite.JDBC");
-                connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/Database/data.db" );
+                connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data.db" );
                 pst = connection.prepareStatement("select * from users where login=(?) and password=(?)");
                 pst.setString(1,uname);
                 pst.setString(2,pass);
@@ -66,6 +66,7 @@ public class LoginController   {
                     /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText("Utilisateur trouvé! ");
                     alert.showAndWait(); */
+                    connection.close();
                     AnchorPane pane;
                 FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/listerdv-2.fxml"));
                 pane = fxmlLoader.load();

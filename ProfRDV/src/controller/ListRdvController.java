@@ -1,22 +1,5 @@
 package controller;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -26,9 +9,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import modele.RDV;
-import modele.Creneau;
 
 
 
@@ -64,7 +54,7 @@ public class ListRdvController  implements Initializable {
             Label motif = new Label();
             Label etat = new Label();
             prof.setText("prof : "+rdv.getpId());
-            date.setText("date : "+rdv.getCreneau().getDate());
+            //date.setText("date : "+rdv.getCreneau().getDate());
             motif.setText("motif : "+rdv.getMotif());
             etat.setText("état : "+rdv.getEtat());
 
@@ -87,7 +77,7 @@ public class ListRdvController  implements Initializable {
             Label motif = new Label();
             Label etat = new Label();
             prof.setText("prof : "+rdv.getpId());
-            date.setText("date : "+rdv.getCreneau().getDate());
+            //date.setText("date : "+rdv.getCreneau().getDate());
             motif.setText("motif : "+rdv.getMotif());
             etat.setText("état : "+rdv.getEtat());
 
@@ -108,7 +98,7 @@ public class ListRdvController  implements Initializable {
         
         try{
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection( "jdbc:sqlite:src/sample/Database/data.db" );
+            connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data.db" );
             pst = connection.prepareStatement("select * from rdv where eId=(?) and etat=(?)" );
             pst.setString(1,"1");
             pst.setString(2,"confirmé");
@@ -143,7 +133,7 @@ public class ListRdvController  implements Initializable {
 //////////// REMPLISSAGE DEUXIEME TABLE
         try{
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection( "jdbc:sqlite:src/sample/Database/data.db" );
+            connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data.db" );
             pst2 = connection.prepareStatement("select * from rdv where eId=(?) and etat=(?)" );
             pst2.setString(1,"1");
             pst2.setString(2,"en attente");
