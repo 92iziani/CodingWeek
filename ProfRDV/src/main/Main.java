@@ -5,9 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import modele.User;
 
 public class Main extends Application {
     public static Stage stage;
+    static User user = new User();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
