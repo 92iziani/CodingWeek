@@ -1,22 +1,29 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.stage.Stage;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.ResourceBundle;
 
 
-public class LoginController   {
+public class LoginController  implements Initializable {
 
+     User user = Login.user;
     Connection connection = null;
     PreparedStatement pst;
     ResultSet rs;
@@ -29,9 +36,10 @@ public class LoginController   {
     @FXML
     private PasswordField password;
 
-    @FXML
-    protected void login() {
 
+
+    @FXML
+    public  void login(ActionEvent event) {
         String uname = login.getText();
         String pass = password.getText();
 
@@ -41,33 +49,33 @@ public class LoginController   {
             alert.showAndWait();
             login.setText("");
             password.setText("");
-            login.requestFocus();
-        }
-
+            login.requestFocus(); }
+        
              try{
                 Class.forName("org.sqlite.JDBC");
-                connection = DriverManager.getConnection( "jdbc:sqlite:data.db" );
-                pst = connection.prepareStatement("select * from users where login=(?) and password=(?)");
+                connection = DriverManager.getConnection( "jdbc:sqlite:data-2.db" );
+                pst = connection.prepareStatement("select * from users where Login=(?) and Password=(?)");
                 pst.setString(1,uname);
                 pst.setString(2,pass);
 
                 rs = pst.executeQuery();
 
-                if (rs.next()) {
-
-                    System.out.println("found it");
-                    /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("Utilisateur trouvé! ");
-                    alert.showAndWait(); */
-                    AnchorPane pane;
-                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("listerdv.fxml"));
+                 if (rs.next()) {
+                    if(rs.getString("Type").equals("Etudiant")){
+                        this.user.setEleve(new Eleve(rs.getString("uId"),rs.getString("Nom"),rs.getString("Email")));
+                    } else{
+                    if(rs.getString("Type").equals("Professeur")){
+                        this.user.setProf(new Prof(rs.getString("uId"),rs.getString("Nom"),rs.getString("Email"),null));
+                    }
+                    }
+                connection.close();
+                AnchorPane pane;
+                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("listerdv-2.fxml"));
                 pane = fxmlLoader.load();
                 MainContext.getChildren().setAll(pane);
+                 }
 
-
-                }
-                else {
-
+                 else {
                     System.out.println("not exist");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText("Utilisateur non trouvé ");
@@ -75,13 +83,23 @@ public class LoginController   {
                     login.setText("");
                     password.setText("");
                     login.requestFocus();
-                }
+                } 
             }
+            
             catch (Exception e){
-                System.out.println(""+e.getMessage());
-            } 
+                System.out.println(""+e.getMessage()); }
+             
         }
+    
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // TODO Auto-generated method stub
+        System.out.println(user.getTest());
+    }
+
+
+        
 
 }
 
