@@ -73,7 +73,7 @@ public class LoginController  implements Initializable {
                     } else{
                         if(rs.getString("Type").equals("Professeur")){
                             this.user.setProf(new Prof(rs.getString("uId"),rs.getString("Nom"),rs.getString("Email"),null));
-                            affiche_listrdvetudiant();
+                            affiche_listrdvprof();
 
                         } else {
 
@@ -119,7 +119,14 @@ public class LoginController  implements Initializable {
         Stage stage = main.Main.getStage();
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/listerdv-2.fxml"));
         stage.setScene(new Scene(fxmlLoader, 600, 500));
-}
+    }
+
+    public void affiche_listrdvprof() throws SQLException, IOException{
+        connection.close();
+        Stage stage = main.Main.getStage();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/listerdvProf.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
+    }
 
         
 
