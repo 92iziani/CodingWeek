@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.HorizontalDirection;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,8 +28,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import modele.Creneau;
 import modele.CreneauxUsuels;
 import modele.Prof;
+import modele.RDV;
 import modele.User;
 
 
@@ -79,7 +82,6 @@ public class vuePriseRDVEtudiantController implements Initializable{
                 // Ajouter rdv à la bd
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
-            System.out.println("cc");
             pst = connection.prepareStatement("select * from users where Type=(?) and Nom=(?)" );
             pst.setString(1,"Professeur");
             pst.setString(2,profName);
@@ -92,7 +94,6 @@ public class vuePriseRDVEtudiantController implements Initializable{
             String Motif =motif;
             String Etat = "En attente";
 
-            System.out.println("cc1");
             PreparedStatement pst3 = connection.prepareStatement("insert into rdv (eId, pId, Date, Heure, Motif, Etat) values ((?), (?), (?), (?), (?), (?))" );
             pst3.setString(1,eId);
             pst3.setString(2,pId);
@@ -115,6 +116,11 @@ public class vuePriseRDVEtudiantController implements Initializable{
     private String localdateToString(LocalDate date) {
         String formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         return formattedDate;
+    }
+    private LocalDate stringToLocaldate(String str){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(str, formatter);
+        return localDate;
     }
 
     private void gotoListerdv() throws IOException {
@@ -172,24 +178,48 @@ public class vuePriseRDVEtudiantController implements Initializable{
             heureChoicebox.getItems().clear();
             Prof profSelected = profByName(profChoicebox.getSelectionModel().getSelectedItem());
             if (profSelected.getCreneaux()!=null && dateChoice.getValue()!=null){
+                String Heure = "0:00";
+                ArrayList<String> heuresPrises = new ArrayList<String>();
+                try{
+                    Class.forName("org.sqlite.JDBC");
+                    connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
+                    PreparedStatement pst = connection.prepareStatement("select * from rdv where pId=(?) and Date=(?)" );
+                    pst.setString(1,profSelected.getpId());
+                    pst.setString(2,localdateToString(dateChoice.getValue()));
+                    ResultSet rs = pst.executeQuery();
+                    
+                    while (rs.next()){
+                        Heure = rs.getString("Heure");
+                        heuresPrises.add(Heure);
+                    }
+                } catch (Exception e){
+                    System.out.println(""+e.getMessage());
+                }
                 for (CreneauxUsuels creneau : profSelected.getCreneaux()){
                     if (creneau.getJour().equals(dateChoice.getValue().getDayOfWeek())){
-                        heureChoicebox.getItems().addAll(horaires(creneau));
+                        heureChoicebox.getItems().addAll(horaires(creneau,heuresPrises));
                     }
                 } 
             } 
         }
     }
 
-    private ArrayList<String> horaires(CreneauxUsuels creneau) {
+    private ArrayList<String> horaires(CreneauxUsuels creneau, ArrayList<String> heuresPrises) {
         ArrayList<String> horaires = new ArrayList<String>();
         String[] heureDebut = creneau.getHeureDebut().split(":");
         String[] heureFin = creneau.getHeureFin().split(":");
+        ArrayList<Integer> minutesPrises = new ArrayList<Integer>();
+        for (String heure : heuresPrises){
+            String[] a = heure.split(":");
+            minutesPrises.add(Integer.parseInt(a[0])*60+Integer.parseInt(a[1]));
+        }
         for (int i = Integer.parseInt(heureDebut[0])*60 +  Integer.parseInt(heureDebut[1])  ; i < Integer.parseInt(heureFin[0])*60 + Integer.parseInt(heureFin[1]) - 10; i = i+10) {
-            if (i%60 == 0){
-                horaires.add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
-            } else {
-                horaires.add(String.valueOf(i/60)+":"+String.valueOf(i%60));
+            if (!minutesPrises.contains(i) && !minutesPrises.contains(i+10) && !minutesPrises.contains(i-10)){
+                if (i%60 == 0){
+                    horaires.add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
+                } else {
+                    horaires.add(String.valueOf(i/60)+":"+String.valueOf(i%60));
+                }
             }
         }
         return horaires;
