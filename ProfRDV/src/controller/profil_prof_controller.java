@@ -5,7 +5,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -16,7 +15,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import modele.CreneauxUsuels;
 import modele.User;
 
 public class profil_prof_controller implements Initializable{
@@ -24,7 +22,6 @@ public class profil_prof_controller implements Initializable{
 
 
     // VARIABLES DE CLASSE
-    private ArrayList<CreneauxUsuels> creneauxUsuels = new ArrayList<CreneauxUsuels>();
     Connection connection = null;
     
     // VARIABLES FXML

@@ -20,14 +20,14 @@
             <Image url="@../photo/logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="close" layoutX="529.0" layoutY="15.0" mnemonicParsing="false" onAction="#closeApplication" text="Quitter" />
+      <Button fx:id="close" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeApplication" text="Quitter" />
       <MenuButton layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="Outils">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <Text layoutX="48.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Utilisateur" textAlignment="CENTER" wrappingWidth="153.5">
+      <Text layoutX="46.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Utilisateur" textAlignment="CENTER" wrappingWidth="153.5">
          <font>
             <Font size="18.0" />
          </font>
@@ -47,7 +47,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="plus1" layoutX="200.0" layoutY="103.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="30.0" prefWidth="98.0" text="ajouter">
+      <Button fx:id="plus1" layoutX="219.0" layoutY="78.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="30.0" prefWidth="98.0" text="ajouter">
          <graphic>
             <ImageView fitHeight="33.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -71,6 +71,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="481.0" layoutY="48.0" mnemonicParsing="false" onAction="#seDeconnecter" prefHeight="26.0" prefWidth="103.0" text="Se deconnecter" />
+      <TextField fx:id="id" layoutX="48.0" layoutY="117.0" onAction="#getid" promptText="Id" />
       </children>
 </AnchorPane>

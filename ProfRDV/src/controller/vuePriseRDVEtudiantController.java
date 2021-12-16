@@ -10,7 +10,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -18,20 +17,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.HorizontalDirection;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import modele.Creneau;
 import modele.CreneauxUsuels;
 import modele.Prof;
-import modele.RDV;
 import modele.User;
 
 
@@ -117,11 +112,11 @@ public class vuePriseRDVEtudiantController implements Initializable{
         String formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         return formattedDate;
     }
-    private LocalDate stringToLocaldate(String str){
+    /* private LocalDate stringToLocaldate(String str){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(str, formatter);
         return localDate;
-    }
+    } */
 
     private void gotoListerdv() throws IOException {
         Stage stage = main.Main.getStage();
