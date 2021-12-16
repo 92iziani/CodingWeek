@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -123,9 +124,17 @@ public class vuePriseRDVEtudiantController implements Initializable{
     }
 
     // AUTRES FONCTIONS
+    @FXML
     public void closeApplication(){
-        Stage stage = (Stage) quitterButton.getScene().getWindow();
-        stage.close();
+        Platform.exit();
+    }
+
+    @FXML
+    public void seDeconnecter() throws IOException{
+        Stage stage = main.Main.getStage();
+        main.Main.user = new User();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
     }
 
     private void updateDatepicker(){
