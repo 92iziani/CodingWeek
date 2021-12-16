@@ -14,7 +14,16 @@
         "/Users/axelgoarant/Downloads/javafxPTN/javafx-sdk-17.0.1/lib/javafx.media.jar",
         "/Users/axelgoarant/Downloads/javafxPTN/javafx-sdk-17.0.1/lib/javafx.swing.jar",
         "/Users/axelgoarant/Downloads/javafxPTN/javafx-sdk-17.0.1/lib/javafx.web.jar",
-        "/Users/axelgoarant/Downloads/javafxPTN/sqlite-jdbc-3.7.2.jar"
+        "/Users/axelgoarant/Downloads/javafxPTN/sqlite-jdbc-3.7.2.jar",
+        "/home/michael/Coding_week/MAsterRESEST/ahmed/sqlite-jdbc-3.7.2.jar",
+        "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx.base.jar",
+        "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx.controls.jar",
+        "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx.fxml.jar",
+        "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx.graphics.jar",
+        "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx.media.jar",
+        "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx.swing.jar",
+        "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx.web.jar",
+        "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx-swt.jar"
     ],
     "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m"
 }

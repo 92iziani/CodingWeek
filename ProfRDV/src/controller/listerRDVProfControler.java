@@ -52,8 +52,8 @@ public class listerRDVProfControler {
             while (rs.next()) {
                 VBox v = new VBox();
                 String id = rs.getString("rId");
-                String date = rs.getString("Date");
-                String etat = rs.getString("Etat");
+                String nom = rs.getString("Nom");
+                String prenom = rs.getString("Prenom");
                 Button b = new Button("accepter: " + id );
                 b.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -71,7 +71,7 @@ public class listerRDVProfControler {
                         addRDVenattente();
                     }
                 });
-                v.getChildren().addAll( new Label(date), new Label(etat), b, bb);
+                v.getChildren().addAll( new Label(nom), new Label(prenom), b, bb);
                 this.vboxRDVAttente.getChildren().addAll(v);
 
             }
