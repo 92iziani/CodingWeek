@@ -13,8 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modele.User;
 
 public class AdminPageControllerv2 {
+
+    User user= main.Main.user;
 
     Connection connection = null;
     PreparedStatement pst;
@@ -54,6 +57,7 @@ public class AdminPageControllerv2 {
     @FXML
     VBox Utilisateurs;
 
+    
 
      public void closeApplication(){
         Stage stage = (Stage) close.getScene().getWindow();
@@ -154,6 +158,39 @@ public class AdminPageControllerv2 {
        } catch (Exception e) {
            System.out.println("" + e.getMessage());
        }
+   }
+
+   public void initialize(){
+    try{
+        Class.forName("org.sqlite.JDBC");
+        connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
+        pst = connection.prepareStatement("select * from users");
+
+        rrs = pst.executeQuery();
+
+        while (rrs.next()) {
+            VBox v = new VBox();
+            String id = rrs.getString("uID");
+            String name = rrs.getString("Nom");
+            String pre = rrs.getString("Prenom"); //unused
+            //System.out.println(name);
+            Button b = new Button("supprimmer: " + id );
+            b.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    delete(id);
+                    refresh();
+                }
+            });
+            v.getChildren().addAll(new Label(name), new Label(pre) ,b);
+            this.Utilisateurs.getChildren().addAll(v);
+
+        }
+        connection.close();
+    }
+    catch (Exception e){
+        System.out.println(""+e.getMessage());
+    }
    }
 
 }

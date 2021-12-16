@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Boot",
+            "request": "launch",
+            "mainClass": "Boot",
+            "projectName": "project-grp26_a5b6f4d4"
+        },
+        {
+            "type": "java",
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "Main",
