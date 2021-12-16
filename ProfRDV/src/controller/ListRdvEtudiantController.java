@@ -84,8 +84,16 @@ public class ListRdvEtudiantController   implements Initializable   {
     }
 
     @FXML
-    public void closeApplication(ActionEvent e){
+    public void closeApplication(){
         Platform.exit();
+    }
+
+    @FXML
+    public void seDeconnecter() throws IOException{
+        Stage stage = main.Main.getStage();
+        main.Main.user = new User();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
     }
 
     @FXML

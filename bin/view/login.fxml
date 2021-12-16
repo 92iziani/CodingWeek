@@ -27,5 +27,6 @@
       <TextField fx:id="login" layoutX="267.0" layoutY="242.0" promptText="Entrez votre login" />
       <Button fx:id="ok" layoutX="451.0" layoutY="317.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="79.0" text="OK" />
       <PasswordField fx:id="password" layoutX="267.0" layoutY="279.0" promptText="Entrez votre mot de passe" />
+      <Button fx:id="quitterButton" layoutX="511.0" layoutY="24.0" mnemonicParsing="false" onAction="#closeApplication" prefHeight="26.0" prefWidth="67.0" text="Quitter" />
    </children>
 </AnchorPane>

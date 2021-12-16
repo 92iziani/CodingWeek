@@ -20,7 +20,7 @@
             <Image url="@../photo/logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="close" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeApplication" text="Quitter" />
+      <Button fx:id="close" layoutX="529.0" layoutY="15.0" mnemonicParsing="false" onAction="#closeApplication" text="Quitter" />
       <MenuButton layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="Outils">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
@@ -71,5 +71,6 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button layoutX="481.0" layoutY="48.0" mnemonicParsing="false" onAction="#seDeconnecter" prefHeight="26.0" prefWidth="103.0" text="Se deconnecter" />
       </children>
 </AnchorPane>
