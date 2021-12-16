@@ -10,5 +10,8 @@
         "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx.swing.jar",
         "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx.web.jar",
         "/home/michael/PCD-javaFX/javafx-sdk-17.0.0.1/lib/javafx-swt.jar"
+    ],
+    "java.project.sourcePaths": [
+        "ProfRDV/src"
     ]
 }

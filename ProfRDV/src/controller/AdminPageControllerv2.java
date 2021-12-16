@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +9,9 @@ import java.sql.ResultSet;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,6 +20,8 @@ import javafx.stage.Stage;
 import modele.User;
 
 public class AdminPageControllerv2 {
+
+    static String Id;
 
     User user= main.Main.user;
 
@@ -29,6 +35,9 @@ public class AdminPageControllerv2 {
 
     @FXML
     Button close;
+    
+    @FXML
+    TextField id;
 
     @FXML
     TextField nom;
@@ -57,6 +66,7 @@ public class AdminPageControllerv2 {
     @FXML
     VBox Utilisateurs;
 
+    
     
 
      public void closeApplication(){
@@ -88,19 +98,24 @@ public class AdminPageControllerv2 {
        //System.out.println(password.getText());
    }
 
+   public void getid(){
+    //System.out.println(id.getText());
+}
+
 
    public void ajouter() {
 
        try {
            Class.forName("org.sqlite.JDBC");
            connection = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
-           pst = connection.prepareStatement("INSERT INTO users (uId, Prenom, Nom, Type, Email, Login, Password) VALUES(1111, (?),(?),(?),(?),(?),(?));");
-           pst.setString(1, nom.getText());
-           pst.setString(2, prenom.getText());
-           pst.setString(3, type.getText());
-           pst.setString(4, email.getText());
-           pst.setString(5, login.getText());
-           pst.setString(6, password.getText());
+           pst = connection.prepareStatement("INSERT INTO users (uId, Prenom, Nom, Type, Email, Login, Password) VALUES((?),(?),(?),(?),(?),(?),(?));");
+           pst.setString(1, id.getText());
+           pst.setString(2, nom.getText());
+           pst.setString(3, prenom.getText());
+           pst.setString(4, type.getText());
+           pst.setString(5, email.getText());
+           pst.setString(6, login.getText());
+           pst.setString(7, password.getText());
 
            pst.executeUpdate();
 
@@ -134,7 +149,14 @@ public class AdminPageControllerv2 {
                        refresh();
                    }
                });
-               v.getChildren().addAll(new Label(name), new Label(pre) ,b);
+               Button bb = new Button("Modifier");
+               bb.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    System.out.println("Professeur modifié !");
+                }
+               });
+               v.getChildren().addAll(new Label(name), new Label(pre) ,b, bb);
                this.Utilisateurs.getChildren().addAll(v);
 
            }
@@ -173,6 +195,7 @@ public class AdminPageControllerv2 {
             String id = rrs.getString("uID");
             String name = rrs.getString("Nom");
             String pre = rrs.getString("Prenom"); //unused
+
             //System.out.println(name);
             Button b = new Button("supprimmer: " + id );
             b.setOnAction(new EventHandler<ActionEvent>() {
@@ -182,7 +205,19 @@ public class AdminPageControllerv2 {
                     refresh();
                 }
             });
-            v.getChildren().addAll(new Label(name), new Label(pre) ,b);
+            Button bb = new Button("Modifier");
+            bb.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        redirection(id);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Professeur modifié !");
+                }
+               });
+            v.getChildren().addAll(new Label(name), new Label(pre) ,b, bb);
             this.Utilisateurs.getChildren().addAll(v);
 
         }
@@ -192,5 +227,13 @@ public class AdminPageControllerv2 {
         System.out.println(""+e.getMessage());
     }
    }
+
+   public void redirection(String i) throws IOException {
+        Stage stage = main.Main.stage;
+        this.Id = i;
+        Parent root = FXMLLoader.load(getClass().getResource("../view/InfoProf.fxml"));
+        stage.setTitle("Hello World");
+        stage.setScene(new Scene(root, 600, 500));
+}
 
 }

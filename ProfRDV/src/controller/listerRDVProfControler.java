@@ -32,6 +32,7 @@ public class listerRDVProfControler {
     VBox confirme;
 
 
+
     public void addRDVenattente(){
         vboxRDVAttente.getChildren().clear();
 
@@ -137,7 +138,7 @@ public class listerRDVProfControler {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
             pst = connection.prepareStatement("Update rdv set Etat = (?) WHERE rId = (?);");
-            pst.setString(1, "Resfuse");
+            pst.setString(1, "Refuse");
             pst.setString(2, id);
 
 
