@@ -1,6 +1,10 @@
-package Controleur;
+package controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -8,17 +12,20 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ChoiceBox;
 import modele.CreneauxUsuels;
+import modele.User;
 
 public class profil_prof_controller implements Initializable{
     User user = main.Main.user;
 
+
     // VARIABLES DE CLASSE
     private ArrayList<CreneauxUsuels> creneauxUsuels = new ArrayList<CreneauxUsuels>();
+    Connection connection = null;
     
     // VARIABLES FXML
     @FXML 
@@ -50,13 +57,13 @@ public class profil_prof_controller implements Initializable{
         jourChoicebox.getItems().add("Jeudi");
         jourChoicebox.getItems().add("Vendredi");
         
-        for (int i = Integer.parseInt(O)*60 +  Integer.parseInt(8)  ; i < Integer.parseInt(1)*60 + Integer.parseInt(8) - 10; i = i+10) {
+        for (int i = 8*60 ; i < 18*60 - 10; i = i+10) {
             if (i%60 == 0){
-                debutChoicebox.getItems.add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
-                finChoicebox.getItems.add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
+                debutChoicebox.getItems().add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
+                finChoicebox.getItems().add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
             } else {
-                debutChoicebox.getItems.add(String.valueOf(i/60)+":"+String.valueOf(i%60));
-                finChoicebox.getItems.add(String.valueOf(i/60)+":"+String.valueOf(i%60));
+                debutChoicebox.getItems().add(String.valueOf(i/60)+":"+String.valueOf(i%60));
+                finChoicebox.getItems().add(String.valueOf(i/60)+":"+String.valueOf(i%60));
             }
         }
     }
