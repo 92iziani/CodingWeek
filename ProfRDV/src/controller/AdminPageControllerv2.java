@@ -60,27 +60,27 @@ public class AdminPageControllerv2 {
     }
 
     public void getnom(){
-        System.out.println(nom.getText());
+        //System.out.println(nom.getText());
    }
 
    public void getprenom(){
-       System.out.println(prenom.getText());
+       //System.out.println(prenom.getText());
    }
 
    public void gettype(){
-       System.out.println(type.getText());
+       //System.out.println(type.getText());
    }
 
    public void getemail(){
-       System.out.println(email.getText());
+       //System.out.println(email.getText());
    }
 
    public void getlogin(){
-       System.out.println(login.getText());
+       //System.out.println(login.getText());
    }
 
    public void getpassword(){
-       System.out.println(password.getText());
+       //System.out.println(password.getText());
    }
 
 
@@ -120,7 +120,7 @@ public class AdminPageControllerv2 {
                String id = rrs.getString("uID");
                String name = rrs.getString("Nom");
                //String pre = rrs.getString("Prenom"); //unused
-               System.out.println(name);
+               //System.out.println(name);
                Button b = new Button("supprimmer: " + id );
                b.setOnAction(new EventHandler<ActionEvent>() {
                    @Override
