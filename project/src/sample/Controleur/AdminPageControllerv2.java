@@ -122,7 +122,7 @@ public class AdminPageControllerv2 {
                 String name = rrs.getString("Nom");
                 String pre = rrs.getString("Prenom");
                 System.out.println(name);
-                Button b = new Button("supprimmer:" + id );
+                Button b = new Button("supprimmer: " + id );
                 b.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -130,6 +130,7 @@ public class AdminPageControllerv2 {
                         refresh();
                     }
                 });
+
                 v.getChildren().addAll(b);
                 this.Utilisateurs.getChildren().addAll(v);
 

@@ -9,6 +9,9 @@ public class Prof {
     private ArrayList<CreneauxUsuels> creneaux;
 
     public Prof() {
+        this.pId = "100";
+        this.pName = "daSilva";
+        this.pEmail = "daSilva";
     }
 
     public Prof(String pId, String pName, String pEmail, ArrayList<CreneauxUsuels> creneaux) {
