@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://gitlab.telecomnancy.univ-lorraine.fr/codingweek2k21/project-grp26">
-    <img src="ProfRDV/src/photo/logo.png" alt="Logo" width="80" height="80">
+    <img src="ProfRDV/src/photo/logo.png" alt="Logo" width="150" height="80">
   </a>
 </div>
 
