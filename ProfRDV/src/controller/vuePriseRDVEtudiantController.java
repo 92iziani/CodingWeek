@@ -21,6 +21,7 @@ import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 import modele.CreneauxUsuels;
 import modele.Prof;
+import modele.User;
 
 
 public class vuePriseRDVEtudiantController implements Initializable{
@@ -52,10 +53,12 @@ public class vuePriseRDVEtudiantController implements Initializable{
 
     @FXML
     private void envoyerButton(ActionEvent e) throws IOException{
-        // Check si le prof, la date et l'heure sont choisis
-        gotoListerdv();
-        // Ajouter rdv à la bd
-        // update modele
+        if (profChoicebox.getSelectionModel().getSelectedItem()!=null && heureChoicebox.getSelectionModel().getSelectedItem()!=null && profChoicebox.getSelectionModel().getSelectedItem()!=null){ // Check si le prof, la date et l'heure sont choisis
+            gotoListerdv();
+            // Ajouter rdv à la bd
+        }   
+        
+        
     }
 
     private void gotoListerdv() throws IOException {
@@ -84,16 +87,20 @@ public class vuePriseRDVEtudiantController implements Initializable{
                     }
                 }
 
-                private boolean isInvalidDate(LocalDate date) {
-                    for (CreneauxUsuels creneau : profSelected.getCreneaux()){
-                        if (date.getDayOfWeek() == creneau.getJour()){
-                            return false;
-                        }
-                    } 
-                    return true;
-                }
             });
         }
+    }
+
+    private boolean isInvalidDate(LocalDate date) {
+        if (profChoicebox.getSelectionModel().getSelectedItem()!=null){
+            Prof profSelected = profByName(profChoicebox.getSelectionModel().getSelectedItem());
+            for (CreneauxUsuels creneau : profSelected.getCreneaux()){
+                if (date.getDayOfWeek() == creneau.getJour()){
+                    return false;
+                }
+            } 
+        }
+        return true;
     }
 
     private void updateHeureChoicebox(){
