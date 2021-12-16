@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -119,7 +120,7 @@ public class AdminPageControllerv2 {
                VBox v = new VBox();
                String id = rrs.getString("uID");
                String name = rrs.getString("Nom");
-               //String pre = rrs.getString("Prenom"); //unused
+               String pre = rrs.getString("Prenom"); //unused
                //System.out.println(name);
                Button b = new Button("supprimmer: " + id );
                b.setOnAction(new EventHandler<ActionEvent>() {
@@ -129,8 +130,7 @@ public class AdminPageControllerv2 {
                        refresh();
                    }
                });
-
-               v.getChildren().addAll(b);
+               v.getChildren().addAll(new Label(name), new Label(pre) ,b);
                this.Utilisateurs.getChildren().addAll(v);
 
            }
