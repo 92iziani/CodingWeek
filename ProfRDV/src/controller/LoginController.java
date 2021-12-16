@@ -1,10 +1,12 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -64,19 +66,26 @@ public class LoginController  implements Initializable {
 
                 rs = pst.executeQuery();
 
-                 if (rs.next()) {
+                if (rs.next()) {
                     if(rs.getString("Type").equals("Etudiant")){
                         this.user.setEleve(new Eleve(rs.getString("uId"),rs.getString("Nom"),rs.getString("Email")));
+                        affiche_listrdvetudiant();
                     } else{
-                    if(rs.getString("Type").equals("Professeur")){
-                        this.user.setProf(new Prof(rs.getString("uId"),rs.getString("Nom"),rs.getString("Email"),null));
+                        if(rs.getString("Type").equals("Professeur")){
+                            this.user.setProf(new Prof(rs.getString("uId"),rs.getString("Nom"),rs.getString("Email"),null));
+                            affiche_listrdvprof();
+
+                        } else {
+
+                            if(rs.getString("Type").equals("root")){
+                                connection.close();
+                                Stage stage = main.Main.getStage();
+                                Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/AdminPagev2.fxml"));
+                                stage.setScene(new Scene(fxmlLoader, 600, 500));
+                            }
+                        }
                     }
-                    }
-                connection.close();
-                Stage stage = main.Main.getStage();
-                Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/listerdv-2.fxml"));
-                stage.setScene(new Scene(fxmlLoader, 600, 500));
-                 }
+                }
 
                  else {
                     System.out.println("not exist");
@@ -102,10 +111,22 @@ public class LoginController  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
-        System.out.println(user.getTest());
+
     }
 
+    public void affiche_listrdvetudiant() throws SQLException, IOException{
+        connection.close();
+        Stage stage = main.Main.getStage();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/listerdv-2.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
+    }
+
+    public void affiche_listrdvprof() throws SQLException, IOException{
+        connection.close();
+        Stage stage = main.Main.getStage();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/listerdvProf.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
+    }
 
         
 
