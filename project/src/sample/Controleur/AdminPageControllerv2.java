@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.HTML;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,6 +27,9 @@ public class AdminPageControllerv2 {
 
     @FXML
     Button close;
+
+    @FXML
+    TextField id;
 
     @FXML
     TextField nom;
@@ -64,6 +68,11 @@ public class AdminPageControllerv2 {
          System.out.println(nom.getText());
     }
 
+    public void getid(){
+        System.out.println(id.getText());
+    }
+
+
     public void getprenom(){
         System.out.println(prenom.getText());
     }
@@ -90,13 +99,14 @@ public class AdminPageControllerv2 {
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:src/sample/Database/data.db");
-            pst = connection.prepareStatement("INSERT INTO users (uId, Prenom, Nom, Type, Email, Login, Password) VALUES(1111, (?),(?),(?),(?),(?),(?));");
-            pst.setString(1, nom.getText());
-            pst.setString(2, prenom.getText());
-            pst.setString(3, type.getText());
-            pst.setString(4, email.getText());
-            pst.setString(5, login.getText());
-            pst.setString(6, password.getText());
+            pst = connection.prepareStatement("INSERT INTO users (uId, Prenom, Nom, Type, Email, Login, Password) VALUES ((?), (?),(?),(?),(?),(?),(?));");
+            pst.setString(1, id.getText());
+            pst.setString(2, nom.getText());
+            pst.setString(3, prenom.getText());
+            pst.setString(4, type.getText());
+            pst.setString(5, email.getText());
+            pst.setString(6, login.getText());
+            pst.setString(7, password.getText());
 
             pst.executeUpdate();
 
@@ -130,7 +140,7 @@ public class AdminPageControllerv2 {
                         refresh();
                     }
                 });
-
+                v.getChildren().addAll(new Label(name), new Label(pre));
                 v.getChildren().addAll(b);
                 this.Utilisateurs.getChildren().addAll(v);
 
