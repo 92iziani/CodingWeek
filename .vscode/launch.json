@@ -1,0 +1,45 @@
+{
+    // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
+    // Pointez pour afficher la description des attributs existants.
+    // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "project-grp26_f7d75e06"
+        },
+        {
+            "type": "java",
+            "name": "Launch Boot",
+            "request": "launch",
+            "mainClass": "Boot",
+            "projectName": "project-grp26_f7d75e06"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "vmArgs": " --module-path /Users/axelgoarant/Downloads/javafxPTN/javafx-sdk-17.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Boot",
+            "request": "launch",
+            "mainClass": "Boot",
+            "vmArgs": " --module-path /Users/axelgoarant/Downloads/javafxPTN/javafx-sdk-17.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "projectName": "Coding week perso_81343ab4"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Controleur.Main",
+            "vmArgs": " --module-path /Users/axelgoarant/Downloads/javafxPTN/javafx-sdk-17.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "projectName": "Coding week perso_81343ab4"
+        }
+    ]
+}
