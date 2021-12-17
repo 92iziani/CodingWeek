@@ -65,6 +65,13 @@ public class vuePriseRDVEtudiantController implements Initializable{
     }
 
     @FXML
+    private void Retour(ActionEvent e) throws IOException{
+        Stage stage = main.Main.getStage();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/listerdv-2.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
+    }
+
+    @FXML
     private void onDatepicker(ActionEvent e){
         updateHeureChoicebox();
     }
