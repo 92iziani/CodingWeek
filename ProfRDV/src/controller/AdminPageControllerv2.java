@@ -126,6 +126,7 @@ public class AdminPageControllerv2 {
                 pst.setString(7, password.getText());
      
                 pst.executeUpdate();
+                refresh();
      
             } catch (Exception e) {
                 System.out.println("" + e.getMessage());
