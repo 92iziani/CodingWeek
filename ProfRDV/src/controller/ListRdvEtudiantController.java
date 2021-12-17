@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,8 +23,6 @@ import modele.RDV;
 import modele.User;
 
 
-
-
 public class ListRdvEtudiantController   implements Initializable   {
 
    User user= main.Main.user;
@@ -37,7 +34,10 @@ public class ListRdvEtudiantController   implements Initializable   {
     ResultSet rs2;
     
     ArrayList<RDV> rdv1 = new ArrayList<>();
+    ArrayList<String> aux1 = new ArrayList<>();
     ArrayList<RDV> rdv2 = new ArrayList<>();
+    ArrayList<String> aux2 = new ArrayList<>();
+
 
     @FXML
     VBox vbox1;
@@ -49,17 +49,41 @@ public class ListRdvEtudiantController   implements Initializable   {
         for (RDV rdv : rdv1){
             Label prof = new Label();
             Label date = new Label();
+            Label heure = new Label();
             Label motif = new Label();
             Label etat = new Label();
             prof.setText("prof : "+rdv.getpId());
-            date.setText("date : "+rdv.getCreneau().getDate());
-            motif.setText("motif : "+rdv.getMotif());
-            etat.setText("état : "+rdv.getEtat());
+            date.setText("Date : "+rdv.getCreneau().getDate());
+            heure.setText("Heure : "+rdv.getCreneau().getHeure());
+            motif.setText("Motif : "+rdv.getMotif());
+            etat.setText("Etat : "+rdv.getEtat());
+
+            try{
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
+                pst = connection.prepareStatement("select * from users where uId=(?)" );
+                String temp = rdv.getpId();
+                pst.setString(1,temp);
+                ResultSet rs = pst.executeQuery();
+                while(rs.next()){
+                    prof.setText("Professeur : "+" "+rs.getString("Nom")+" "+ rs.getString("Prenom"));
+                }
+
+
+            } catch (Exception e) {
+                System.out.println(""+e.getMessage());
+            }
 
             vbox1.getChildren().add(prof);
             vbox1.getChildren().add(date);
+            vbox1.getChildren().add(heure);
             vbox1.getChildren().add(motif);
             vbox1.getChildren().add(etat);
+            for(int i=0; i<1;i++){
+                Label vides = new Label();
+                vbox1.getChildren().add(vides);
+
+            }
         }
         
     }
@@ -68,17 +92,43 @@ public class ListRdvEtudiantController   implements Initializable   {
         for (RDV rdv : rdv2){
             Label prof = new Label();
             Label date = new Label();
+            Label heure = new Label();
             Label motif = new Label();
             Label etat = new Label();
             prof.setText("prof : "+rdv.getpId());
-            date.setText("date : "+rdv.getCreneau().getDate());
-            motif.setText("motif : "+rdv.getMotif());
-            etat.setText("état : "+rdv.getEtat());
+            date.setText("Date : "+rdv.getCreneau().getDate());
+            heure.setText("Heure : "+rdv.getCreneau().getHeure());
+            motif.setText("Motif : "+rdv.getMotif());
+            etat.setText("Etat : "+rdv.getEtat());
+
+
+            try{
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
+                pst = connection.prepareStatement("select * from users where uId=(?)" );
+                String temp = rdv.getpId();
+                pst.setString(1,temp);
+                ResultSet rs = pst.executeQuery();
+                while(rs.next()){
+                    prof.setText("Professeur : "+" "+rs.getString("Nom")+" "+ rs.getString("Prenom"));
+                }
+
+
+            } catch (Exception e) {
+                System.out.println(""+e.getMessage());
+            }
+
 
             vbox2.getChildren().add(prof);
             vbox2.getChildren().add(date);
+            vbox2.getChildren().add(heure);
             vbox2.getChildren().add(motif);
             vbox2.getChildren().add(etat);
+            for(int i=0; i<1;i++){
+                Label vides = new Label();
+                vbox2.getChildren().add(vides);
+
+            }
         }
         
     }
@@ -128,6 +178,8 @@ public class ListRdvEtudiantController   implements Initializable   {
             String heure = rs.getString("Heure");
             Creneau creneau = new Creneau(date,heure);
             RDV rdv = new RDV(rid,eID,pID,etat,creneau,motif);
+
+
             rdv1.add(rdv);
             
 
