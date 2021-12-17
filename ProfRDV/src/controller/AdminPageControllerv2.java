@@ -111,25 +111,26 @@ public class AdminPageControllerv2 {
     }
 
 
-   public void ajouter() {
-
-       try {
-           Class.forName("org.sqlite.JDBC");
-           connection = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
-           pst = connection.prepareStatement("INSERT INTO users (uId, Prenom, Nom, Type, Email, Login, Password) VALUES((?),(?),(?),(?),(?),(?),(?));");
-           pst.setString(1, id.getText());
-           pst.setString(2, nom.getText());
-           pst.setString(3, prenom.getText());
-           pst.setString(4, type.getText());
-           pst.setString(5, email.getText());
-           pst.setString(6, login.getText());
-           pst.setString(7, password.getText());
-
-           pst.executeUpdate();
-
-       } catch (Exception e) {
-           System.out.println("" + e.getMessage());
-       }
+    public void ajouter() {
+        if (id.getText()!=null && nom.getText()!=null && prenom.getText()!=null && type.getText()!=null && email.getText()!=null && login.getText()!=null && password.getText()!=null){
+            try {
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
+                pst = connection.prepareStatement("INSERT INTO users (uId, Prenom, Nom, Type, Email, Login, Password) VALUES((?),(?),(?),(?),(?),(?),(?));");
+                pst.setString(1, id.getText());
+                pst.setString(2, nom.getText());
+                pst.setString(3, prenom.getText());
+                pst.setString(4, type.getText());
+                pst.setString(5, email.getText());
+                pst.setString(6, login.getText());
+                pst.setString(7, password.getText());
+     
+                pst.executeUpdate();
+     
+            } catch (Exception e) {
+                System.out.println("" + e.getMessage());
+            }
+        }
    }
 
    public void refresh(){
