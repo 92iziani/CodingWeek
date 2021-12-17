@@ -61,29 +61,23 @@ Pour utiliser l'application :
 
 Nous n'arrivions pas initiallment à exécuter le jar. Nous avons trouvé une commande pour l'exécuter cependant un problème de path rend l'utilisation partielle. Il est cependant parfaitement exécutable via InteliJ en lançant le main /project/src/sample/Main.java
 
-- Page de login
-Login pour passer sur le profil étudiant :
-id : charoy
-pass : azerty
-Pour le profil professeur :
-Appuyer sur le bouton temporaire prof
 
-- Page profil étudiant :
-Pour ajouter un rendez-vous : bouton ajouter
-Quitter : bouton quitter
-La visualisation des rdv ne marche pas encore
 
-- Page ajouter rdv étudiant :
-Des données exemples sont générées
-Selectionner Le prof : les horaires et jours disponibles sont mis à jour
-Selectionner Le jour : les horaires disponibles sont mis à jour
-Selectionner horaires
-Motif optionnel
-Bouton envoyer ne marche pas encore
+- Se connecter en tant qu'administrateur:
+Login : root
+password : root
+l'admin pourra donc ajouter, modifier et supprimer un élève ou un professeur.
 
-- Page profil prof :
-Bouton test fenêtre de gauche
-Quitter : bouton quitter
-La visualisation des rdv ne marche pas encore
+- Se connecter en tant qu'étudiant :
+Login : allouch21u (par exemple)
+Mot de passe : password
+L'étudiant peut afficher ses rendez-vous confirmés et ses rendez-vous en attente, il peut également faire une demande de rendez-vous avec un professeur selon ses disponibilités.
+
+- Se connecter en tant que professeur :
+Login : oster21u (par exemple)
+Mot de passe : password
+Le professeur peut annuler les rendez-vous qui'il a confirmé auparavant, accepter ou refuser les nouvelles demande de rendez-vous qui a reçu (rendez-vous en attente), et il peut également définir ses disponibilités/indisponibilités habituelles et inhabituelles.
+
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
