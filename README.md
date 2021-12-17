@@ -69,9 +69,9 @@ Comment vous pouvez lancer l'application :
 -De la même manière que nous
 
 8. 
-**Note importante aux encadrants** :
+**NOTE IMPORTANTE AUX ENCADRANTS** :
 La compilation du .jar connaît une erreur qu'on a pas pu régler. (QuantumRenderer et No tool kit found !)
-Rq: Une compilation sur IntelliJ et Java SE 8 (sdk 1.8) marche direcmtement.
+**REMARQUE** : Une compilation sur IntelliJ avec Java SE 8 (sdk 1.8) marche directement.
 
 
 ## Fonctionnalités principales de l'application
