@@ -116,18 +116,31 @@ public class AdminPageControllerv2 {
             try {
                 Class.forName("org.sqlite.JDBC");
                 connection = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
-                pst = connection.prepareStatement("INSERT INTO users (uId, Prenom, Nom, Type, Email, Login, Password) VALUES((?),(?),(?),(?),(?),(?),(?));");
-                pst.setString(1, id.getText());
-                pst.setString(2, nom.getText());
-                pst.setString(3, prenom.getText());
-                pst.setString(4, type.getText());
-                pst.setString(5, email.getText());
-                pst.setString(6, login.getText());
-                pst.setString(7, password.getText());
-     
-                pst.executeUpdate();
-                refresh();
-     
+                PreparedStatement pst2;
+                pst2 = connection.prepareStatement("SELECT * FROM users where uId = (?)");
+                pst2.setString(1, id.getText());
+                ResultSet rs = pst2.executeQuery();
+                if (!rs.next()){
+                    try {
+                        Connection connection2 = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
+                        pst = connection2.prepareStatement("INSERT INTO users (uId, Prenom, Nom, Type, Email, Login, Password) VALUES((?),(?),(?),(?),(?),(?),(?));");
+                        pst.setString(1, id.getText());
+                        pst.setString(2, nom.getText());
+                        pst.setString(3, prenom.getText());
+                        pst.setString(4, type.getText());
+                        pst.setString(5, email.getText());
+                        pst.setString(6, login.getText());
+                        pst.setString(7, password.getText());
+            
+                        pst.executeUpdate();
+                        refresh();
+                        connection2.close();
+            
+                    } catch (Exception e) {
+                        System.out.println("" + e.getMessage());
+                    }
+                }
+                connection.close();
             } catch (Exception e) {
                 System.out.println("" + e.getMessage());
             }
