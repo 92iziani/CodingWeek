@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,6 +27,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modele.CreneauxUsuels;
+import modele.DispoExp;
 import modele.Prof;
 import modele.User;
 
@@ -41,6 +43,8 @@ public class vuePriseRDVEtudiantController implements Initializable{
     // AUTRES
     ArrayList<Prof> profs = new ArrayList<Prof>();
     User user = main.Main.user;
+    ArrayList<DispoExp> disExecptionnelles = new ArrayList<DispoExp>();
+    ArrayList<DispoExp> indisExecptionnelles = new ArrayList<DispoExp>();
 
     // CONTROLES FXML
     @FXML 
@@ -112,11 +116,11 @@ public class vuePriseRDVEtudiantController implements Initializable{
         String formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         return formattedDate;
     }
-    /* private LocalDate stringToLocaldate(String str){
+    private LocalDate stringToLocaldate(String str){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(str, formatter);
         return localDate;
-    } */
+    }
 
     private void gotoListerdv() throws IOException {
         Stage stage = main.Main.getStage();
@@ -140,6 +144,7 @@ public class vuePriseRDVEtudiantController implements Initializable{
 
     private void updateDatepicker(){
         if (profChoicebox.getSelectionModel().getSelectedItem()!=null){
+            createData2();
             Prof profSelected = profByName(profChoicebox.getSelectionModel().getSelectedItem());
             dateChoice.setDayCellFactory(picker -> new DateCell() {
                 public void updateItem(LocalDate date, boolean empty) {
@@ -160,12 +165,21 @@ public class vuePriseRDVEtudiantController implements Initializable{
         if (profChoicebox.getSelectionModel().getSelectedItem()!=null){
             Prof profSelected = profByName(profChoicebox.getSelectionModel().getSelectedItem());
             for (CreneauxUsuels creneau : profSelected.getCreneaux()){
-                if (date.getDayOfWeek() == creneau.getJour()){
+                if (date.getDayOfWeek() == creneau.getJour() || containsDate(date)){
                     return false;
                 }
             } 
         }
         return true;
+    }
+
+    public boolean containsDate(LocalDate date){
+        for (DispoExp dispo : disExecptionnelles){
+            if (dispo.getJour().equals(date)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void updateHeureChoicebox(){
@@ -192,11 +206,39 @@ public class vuePriseRDVEtudiantController implements Initializable{
                 }
                 for (CreneauxUsuels creneau : profSelected.getCreneaux()){
                     if (creneau.getJour().equals(dateChoice.getValue().getDayOfWeek())){
+                      System.out.println("non");
                         heureChoicebox.getItems().addAll(horaires(creneau,heuresPrises));
                     }
                 } 
+                if (containsDate(dateChoice.getValue())){
+                    for (DispoExp dispo : disExecptionnelles){
+                        System.out.println("oui");
+                        heureChoicebox.getItems().addAll(horaires(dispo,heuresPrises));
+                    }
+                }
             } 
         }
+    }
+
+    private ArrayList<String> horaires(DispoExp dispo, ArrayList<String> heuresPrises) {
+        ArrayList<String> horaires = new ArrayList<String>();
+        String[] heureDebut = dispo.getHeureDebut().split(":");
+        String[] heureFin = dispo.getHeureFin().split(":");
+        ArrayList<Integer> minutesPrises = new ArrayList<Integer>();
+        for (String heure : heuresPrises){
+            String[] a = heure.split(":");
+            minutesPrises.add(Integer.parseInt(a[0])*60+Integer.parseInt(a[1]));
+        }
+        for (int i = Integer.parseInt(heureDebut[0])*60 +  Integer.parseInt(heureDebut[1])  ; i < Integer.parseInt(heureFin[0])*60 + Integer.parseInt(heureFin[1]) - 10; i = i+10) {
+            if (!minutesPrises.contains(i) && !minutesPrises.contains(i+10) && !minutesPrises.contains(i-10)){
+                if (i%60 == 0){
+                    horaires.add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
+                } else {
+                    horaires.add(String.valueOf(i/60)+":"+String.valueOf(i%60));
+                }
+            }
+        }
+        return horaires;
     }
 
     private ArrayList<String> horaires(CreneauxUsuels creneau, ArrayList<String> heuresPrises) {
@@ -222,7 +264,7 @@ public class vuePriseRDVEtudiantController implements Initializable{
 
     // INITIALISE
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) {  
         createData();   // Génération des données
         // BIEN CONFIGURER LES CHOICEBOX ET TOUT
         for (Prof prof : profs){
@@ -231,6 +273,32 @@ public class vuePriseRDVEtudiantController implements Initializable{
     }
 
     
+
+    private void createData2() { // a appeler
+        disExecptionnelles = new ArrayList<DispoExp>();
+        indisExecptionnelles = new ArrayList<DispoExp>();
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
+            pst = connection.prepareStatement("select * from exceptionnelle inner join users on users.uId=exceptionnelle.pId where Nom = (?)");
+            pst.setString(1,profChoicebox.getSelectionModel().getSelectedItem());
+            rs = pst.executeQuery();
+            while(rs.next()){
+                DispoExp dispo;
+                DispoExp indispo;
+                if (rs.getString("TypeD").equals("Dis")){
+                    dispo = new DispoExp(stringToLocaldate(rs.getString("Date")), rs.getString("HeureDebut"), rs.getString("HeureFin"), true);
+                    disExecptionnelles.add(dispo);
+                } else {
+                    indispo = new DispoExp(stringToLocaldate(rs.getString("Date")), rs.getString("HeureDebut"), rs.getString("HeureFin"), false);
+                    indisExecptionnelles.add(indispo);
+                }
+            }
+            connection.close();
+        } catch (Exception e){
+            System.out.println(""+e.getMessage());
+        }
+    }
 
     //AUTRES FONCTIONS
     private void createData() {
