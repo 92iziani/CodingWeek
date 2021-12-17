@@ -30,6 +30,8 @@ public class AdminPageControllerv2 {
     PreparedStatement pst;
     ResultSet rs;
     ResultSet rrs;
+    String cc;
+    int c = 0;
 
     @FXML
     VBox vboxRDVAttente;
@@ -110,29 +112,58 @@ public class AdminPageControllerv2 {
         //System.out.println(id.getText());
     }
 
+    
 
-   public void ajouter() {
 
-       try {
-           Class.forName("org.sqlite.JDBC");
-           connection = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
-           pst = connection.prepareStatement("INSERT INTO users (uId, Prenom, Nom, Type, Email, Login, Password) VALUES((?),(?),(?),(?),(?),(?),(?));");
-           pst.setString(1, id.getText());
-           pst.setString(2, nom.getText());
-           pst.setString(3, prenom.getText());
-           pst.setString(4, type.getText());
-           pst.setString(5, email.getText());
-           pst.setString(6, login.getText());
-           pst.setString(7, password.getText());
-
-           pst.executeUpdate();
-
-       } catch (Exception e) {
-           System.out.println("" + e.getMessage());
-       }
+    public void ajouter() {
+        if (id.getText()!=null && nom.getText()!=null && prenom.getText()!=null && type.getText()!=null && email.getText()!=null && login.getText()!=null && password.getText()!=null){
+            try {
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
+                PreparedStatement pst2;
+                pst2 = connection.prepareStatement("SELECT * FROM users where uId = (?)");
+                pst2.setString(1, id.getText());
+                ResultSet rs = pst2.executeQuery();
+                
+                if (!rs.next()){
+                    try {
+                        Connection connection2 = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
+                        pst = connection2.prepareStatement("INSERT INTO users (uId, Prenom, Nom, Type, Email, Login, Password) VALUES((?),(?),(?),(?),(?),(?),(?));");
+                        pst.setString(1, id.getText());
+                        pst.setString(2, nom.getText());
+                        pst.setString(3, prenom.getText());
+                        pst.setString(4, type.getText());
+                        pst.setString(5, email.getText());
+                        pst.setString(6, login.getText());
+                        pst.setString(7, password.getText());
+            
+                        pst.executeUpdate();
+                        refresh();
+                        clearText();
+                        connection2.close();
+            
+                    } catch (Exception e) {
+                        System.out.println("" + e.getMessage());
+                    }
+                }
+                connection.close();
+            } catch (Exception e) {
+                System.out.println("" + e.getMessage());
+            }
+        }
    }
 
-   public void refresh(){
+    private void clearText() {
+        id.clear();
+        nom.clear();
+        prenom.clear();
+        type.clear();
+        email.clear();
+        login.clear();
+        password.clear();
+    }
+
+    public void refresh(){
         
         Utilisateurs.getChildren().clear();
 
@@ -161,6 +192,11 @@ public class AdminPageControllerv2 {
                bb.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent event) {
+                    try {
+                        redirection(id);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println("Professeur modifié !");
                 }
                });
@@ -234,6 +270,7 @@ public class AdminPageControllerv2 {
     catch (Exception e){
         System.out.println(""+e.getMessage());
     }
+
    }
 
    public void redirection(String i) throws IOException {
