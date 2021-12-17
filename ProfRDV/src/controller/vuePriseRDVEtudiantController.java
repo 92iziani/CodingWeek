@@ -37,13 +37,14 @@ public class vuePriseRDVEtudiantController implements Initializable{
     Connection connection = null;
     PreparedStatement pst;
     PreparedStatement pst2;
-    ResultSet rs, rs2;
+    ResultSet rs, rs2, rrs;
 
     // AUTRES
     ArrayList<Prof> profs = new ArrayList<Prof>();
     User user = main.Main.user;
     ArrayList<DispoExp> disExecptionnelles = new ArrayList<DispoExp>();
     ArrayList<DispoExp> indisExecptionnelles = new ArrayList<DispoExp>();
+    int c=0;
 
     // CONTROLES FXML
     @FXML 
@@ -91,14 +92,21 @@ public class vuePriseRDVEtudiantController implements Initializable{
             String Heure = heure;
             String Motif =motif;
             String Etat = "En attente";
-
-            PreparedStatement pst3 = connection.prepareStatement("insert into rdv (eId, pId, Date, Heure, Motif, Etat) values ((?), (?), (?), (?), (?), (?))" );
-            pst3.setString(1,eId);
-            pst3.setString(2,pId);
-            pst3.setString(3,Date);
-            pst3.setString(4,Heure);
-            pst3.setString(5,Motif);
-            pst3.setString(6,Etat);
+            PreparedStatement pstcount = connection.prepareStatement("select max(rId) from rdv;");
+            pstcount.execute();
+            rrs = pstcount.executeQuery();
+            c = rrs.getInt(1);
+            System.out.println(c);
+            c++;
+            String cc = String.valueOf(c);            
+            PreparedStatement pst3 = connection.prepareStatement("insert into rdv (rId, eId, pId, Date, Heure, Motif, Etat) values ((?), (?), (?), (?), (?), (?), (?))" );
+            pst3.setString(1,cc);
+            pst3.setString(2,eId);
+            pst3.setString(3,pId);
+            pst3.setString(4,Date);
+            pst3.setString(5,Heure);
+            pst3.setString(6,Motif);
+            pst3.setString(7,Etat);
             pst3.execute();
             connection.close();
             }
