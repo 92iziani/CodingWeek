@@ -64,14 +64,14 @@ Nous n'arrivions pas initiallment à exécuter le jar. Nous avons trouvé une co
 
 
 - Se connecter en tant qu'administrateur:
-Login : root
-password : root
-l'admin pourra donc ajouter, modifier et supprimer un élève ou un professeur.
+* Login : root
+* Mot de passe : root
+* L'admin pourra donc ajouter, modifier et supprimer un élève ou un professeur.
 
 - Se connecter en tant qu'étudiant :
-Login : allouch21u (par exemple)
-Mot de passe : password
-L'étudiant peut afficher ses rendez-vous confirmés et ses rendez-vous en attente, il peut également faire une demande de rendez-vous avec un professeur selon ses disponibilités.
+* Login : allouch21u (par exemple)
+* Mot de passe : password
+* L'étudiant peut afficher ses rendez-vous confirmés et ses rendez-vous en attente, il peut également faire une demande de rendez-vous avec un professeur selon ses disponibilités.
 
 - Se connecter en tant que professeur :
 * Login : oster21u (par exemple)
