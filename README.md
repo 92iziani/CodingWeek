@@ -69,16 +69,16 @@ Comment vous pouvez lancer l'application :
 -De la même manière que nous
 
 8. 
-Note importante aux encadrants :
+**Note importante aux encadrants** :
 La compilation du .jar connaît une erreur qu'on a pas pu régler. (QuantumRenderer et No tool kit found !)
 Rq: Une compilation sur IntelliJ et Java SE 8 (sdk 1.8) marche direcmtement.
 
 
-## Comment utiliser l'application ?
+## Fonctionnalités principales de l'application
 
 Pour utiliser l'application :
 
-Nous n'arrivions pas initiallment à exécuter le jar. Nous avons trouvé une commande pour l'exécuter cependant un problème de path rend l'utilisation partielle. Il est cependant parfaitement exécutable via InteliJ en lançant le main /project/src/sample/Main.java
+Nous n'arrivions pas initiallment à exécuter le jar. Nous avons trouvé une commande pour l'exécuter cependant un problème de path rend l'utilisation partielle. Il est cependant parfaitement exécutable via IntelliJ (en utilisation la version 1.8 de Java) en lançant le main /project/src/sample/Main.java
 
 - Se connecter en tant qu'administrateur:
 * Login : root
