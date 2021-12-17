@@ -33,30 +33,34 @@ Le programme utilise les technologies suivantes :
 
 ## Comment lancer l'application ?
 
-On va détailler ...
-
 Comment nous lançons l'application :
+
 1. Ouvir le répertoire "project-grp26" (le répertoire dans lequel ce readme est) dans [Visual Studio Code](https://code.visualstudio.com/).
+
 2. Dans Visual Studio Code, cliquer sur le fichier Boot.java (/ProfRDV/src/Boot.java).
 Visual Studio Code charge alors le projet Java.
+
 3. Regarder dans l'onglet "JAVA PROJECT" si les dépendances de javaFX et sqlite sont renseignées:
 -Ouvrir le menu déroulant "JAVA PROJECT"
 -Ouvrir le menu déroulant "project-grp26"
 -Ouvrir le menu déroulant "Referenced Libraries"
 Si ce dossier est vide importer (bouton +) dans "Referenced Libraries" les dépendances .jar javaFX et sqlite, disponibles dans le dossier lib, ou téléchargeables ([javaFX](https://gluonhq.com/products/javafx/), [sqlite](http://www.java2s.com/Code/Jar/s/Downloadsqlitejdbc372jar.htm)).
+
 4. Modifier dans le fichier "launch.json" les lignes :
 ```bash
   "vmArgs": " --module-path %path_to_javafx/lib% --add-modules javafx.controls,javafx.fxml",
   ```
 En remplaçant "%path_to_javafx/lib%" par le chemin vers le dossier où javaFX est installé.
+
 5. Une fois les dépendances chargés, nous appuyons sur le bouton run (► run Java) pour lancer Boot.java.
+
 6. Il se peut que celà ne marche pas. Si celà est le cas, vérifier le fichier "launch.json". Si une nouvelle configuration est apparue, rajouter la commande :
 ```bash
   "vmArgs": " --module-path %path_to_javafx/lib% --add-modules javafx.controls,javafx.fxml",
   ```
   au dessus de la ligne commençant pas "mainClass". Reappuyer sur run.
-7. L'application démarre.
 
+7. L'application démarre.
 Comment vous pouvez lancer l'application : 
 -Via le jar : 
   ```bash
@@ -64,14 +68,17 @@ Comment vous pouvez lancer l'application :
   ```
 -De la même manière que nous
 
+8. 
+Note importante aux encadrants :
+La compilation du .jar connaît une erreur qu'on a pas pu régler. (QuantumRenderer et No tool kit found !)
+Rq: Une compilation sur IntelliJ et Java SE 8 (sdk 1.8) marche direcmtement.
+
 
 ## Comment utiliser l'application ?
 
 Pour utiliser l'application :
 
 Nous n'arrivions pas initiallment à exécuter le jar. Nous avons trouvé une commande pour l'exécuter cependant un problème de path rend l'utilisation partielle. Il est cependant parfaitement exécutable via InteliJ en lançant le main /project/src/sample/Main.java
-
-
 
 - Se connecter en tant qu'administrateur:
 * Login : root
@@ -87,7 +94,5 @@ Nous n'arrivions pas initiallment à exécuter le jar. Nous avons trouvé une co
 * Login : oster21u (par exemple)
 * Mot de passe : password
 * Le professeur peut annuler les rendez-vous qui'il a confirmé auparavant, accepter ou refuser les nouvelles demande de rendez-vous qui a reçu (rendez-vous en attente), et il peut également définir ses disponibilités/indisponibilités habituelles et inhabituelles.
-
-
 
 <p align="right">(<a href="#top">back to top</a>)</p>
