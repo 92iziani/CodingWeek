@@ -204,6 +204,12 @@ public class vuePriseRDVEtudiantController implements Initializable{
                 } catch (Exception e){
                     System.out.println(""+e.getMessage());
                 }
+                // Ajout heures prises via indispo
+                for (DispoExp indispo : indisExecptionnelles){
+                    if (indispo.getJour().equals(dateChoice.getValue())){
+                        heuresPrises.addAll(horaires(indispo, heuresPrises));
+                    }
+                }
                 for (CreneauxUsuels creneau : profSelected.getCreneaux()){
                     if (creneau.getJour().equals(dateChoice.getValue().getDayOfWeek())){
                       System.out.println("non");
