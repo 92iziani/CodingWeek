@@ -49,8 +49,13 @@ Si ce dossier est vide importer (bouton +) dans "Referenced Libraries" les dépe
   "vmArgs": " --module-path %path_to_javafx/lib% --add-modules javafx.controls,javafx.fxml",
   ```
 En remplaçant "%path_to_javafx/lib%" par le chemin vers le dossier où javaFX est installé.
-5. Une fois les dépendances chargés, nous appuyons sur le bouton run (► run Java).
-6. L'application démarre.
+5. Une fois les dépendances chargés, nous appuyons sur le bouton run (► run Java) pour lancer Boot.java.
+6. Il se peut que celà ne marche pas. Si celà est le cas, vérifier le fichier "launch.json". Si une nouvelle configuration est apparue, rajouter la commande :
+```bash
+  "vmArgs": " --module-path %path_to_javafx/lib% --add-modules javafx.controls,javafx.fxml",
+  ```
+  au dessus de la ligne commençant pas "mainClass". Reappuyer sur run.
+7. L'application démarre.
 
 Comment vous pouvez lancer l'application : 
 -Via le jar : 
