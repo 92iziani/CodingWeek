@@ -67,4 +67,5 @@
       </Button>
       <TextField fx:id="id" layoutX="48.0" layoutY="117.0" onAction="#getid" promptText="Id" />
       </children>
+      <Button layoutX="483.0" layoutY="48.0" mnemonicParsing="false" onAction="#seDeconnecter" prefHeight="26.0" prefWidth="103.0" text="Se deconnecter" />
 </AnchorPane>
