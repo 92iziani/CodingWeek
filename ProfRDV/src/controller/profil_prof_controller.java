@@ -69,6 +69,14 @@ public class profil_prof_controller implements Initializable{
         Platform.exit();
     }
 
+    @FXML
+    public void seDeconnecter(ActionEvent event) throws IOException {
+        Stage stage = main.Main.getStage();
+        main.Main.user = new User();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
+    }
+
 
     // INITIALIZE
     @Override
