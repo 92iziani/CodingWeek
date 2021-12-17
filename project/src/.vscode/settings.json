@@ -1,7 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "/Users/axelgoarant/Downloads/javafxPTN/javafx-sdk-17.0.1/**/*.jar",
-        "/Users/axelgoarant/Downloads/javafxPTN/sqlite-jdbc-3.7.2.jar"
-    ]
-}
