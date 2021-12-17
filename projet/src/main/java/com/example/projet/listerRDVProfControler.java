@@ -1,38 +1,42 @@
 package controller;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javafx.scene.layout.VBox;
+
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import modele.Prof;
 import modele.User;
 
 public class listerRDVProfControler {
+
+    //ADDED
+    Image image = new Image(getClass().getResourceAsStream("../view/valider.png"));
+   //Image image = new Image("valider.png");
+    ImageView view = new ImageView(image);
+    
+
+    //ADDED
+    //view.setFitHeight(80);
+    //view.setPreserveRatio(true);
 
     User user= main.Main.user;
     Connection connection = null;
     PreparedStatement pst;
     ResultSet rs;
-
-    String cssLayout = "-fx-border-color: red;\n" +
-                   "-fx-border-insets: 5;\n" +
-                   "-fx-border-width: 3;\n" +
-                   "-fx-border-style: dashed;\n";
-
-    Image img = new Image("@../photo/valider.png");
-    ImageView view = new ImageView(img);
-
-    
 
     @FXML
     VBox vboxRDVAttente;
@@ -43,18 +47,15 @@ public class listerRDVProfControler {
     @FXML
     VBox confirme;
 
-    
-    
+
 
     public void addRDVenattente(){
         vboxRDVAttente.getChildren().clear();
-        //VBox yourBox = new VBox();   
-        //yourBox.setStyle(cssLayout);
 
         try{
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
-            pst = connection.prepareStatement("select * from rdv where pId = (?) and Etat = (?)");
+            pst = connection.prepareStatement("select * from rdv join users on rdv.eId = users.uId where pId = (?) and Etat = (?) ");
             pst.setString(1, user.prof.getpId());
             pst.setString(2, "En attente");
 
@@ -62,15 +63,14 @@ public class listerRDVProfControler {
 
             while (rs.next()) {
                 VBox v = new VBox();
-                ////ADDED
-                //v.setStyle(cssLayout);
-                /////
                 String id = rs.getString("rId");
-                String date = rs.getString("Date");
-                String etat = rs.getString("Etat");
-                
+                String nom = rs.getString("Nom");
+                String prenom = rs.getString("Prenom");
                 //Button b = new Button("accepter: " + id );
+                view.setFitHeight(30);
+                view.setPreserveRatio(true);
                 Button b = new Button();
+                b.setPrefSize(10, 10);
                 b.setGraphic(view);
 
                 b.setOnAction(new EventHandler<ActionEvent>() {
@@ -80,7 +80,12 @@ public class listerRDVProfControler {
                         addRDVenattente();
                     }
                 });
-                Button bb = new Button("refuser : " + id);
+                //Button bb = new Button("refuser : " + id);
+                view.setFitHeight(30);
+                view.setPreserveRatio(true);
+                Button bb = new Button();
+                bb.setPrefSize(10, 10);
+                bb.setGraphic(view);
 
                 bb.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -89,7 +94,7 @@ public class listerRDVProfControler {
                         addRDVenattente();
                     }
                 });
-                v.getChildren().addAll( new Label(date), new Label(etat), b, bb);
+                v.getChildren().addAll( new Label(nom), new Label(prenom), b, bb);
                 this.vboxRDVAttente.getChildren().addAll(v);
 
             }
@@ -107,18 +112,22 @@ public class listerRDVProfControler {
         try{
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
-            pst = connection.prepareStatement("select * from rdv where pId = (?) and Etat = (?)");
+            pst = connection.prepareStatement("select * from rdv join users on rdv.eId = users.uId where pId = (?) and Etat = (?)");
             pst.setString(1, user.prof.getpId());
             pst.setString(2, "Confirme");
             rs = pst.executeQuery();
 
             while (rs.next()) {
                 VBox v = new VBox();
-                //v.setStyle(cssLayout);
                 String id = rs.getString("rId");
-                String date = rs.getString("Date");
-                String etat = rs.getString("Etat");
-                Button b = new Button("supprimer: " + id );
+                String nom = rs.getString("Nom");
+                String prenom = rs.getString("Prenom");
+                //Button b = new Button("supprimer: " + id );
+                view.setFitHeight(30);
+                view.setPreserveRatio(true);
+                Button b = new Button();
+                b.setPrefSize(10, 10);
+                b.setGraphic(view);
                 b.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -127,7 +136,7 @@ public class listerRDVProfControler {
                     }
                 });
 
-                v.getChildren().addAll( new Label(date), new Label(etat), b);
+                v.getChildren().addAll( new Label(nom), new Label(prenom), b);
                 this.confirme.getChildren().addAll(v);
 
             }
@@ -150,7 +159,7 @@ public class listerRDVProfControler {
 
 
             pst.executeUpdate();
-
+            connection.close();
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
@@ -167,6 +176,7 @@ public class listerRDVProfControler {
 
 
             pst.executeUpdate();
+            connection.close();
 
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
@@ -183,22 +193,22 @@ public class listerRDVProfControler {
 
 
             pst.executeUpdate();
-
+            connection.close();
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
     }
 
+    @FXML
     public void closeApplication(){
-        Stage stage = (Stage) close.getScene().getWindow();
-        stage.close();
+        Platform.exit();
     }
-
     public void initialize(){
+        System.out.println("cc");
         try{
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
-            pst = connection.prepareStatement("select * from rdv where pId = (?) and Etat = (?)");
+            pst = connection.prepareStatement("select * from rdv join users on rdv.eId = users.uId where pId = (?) and Etat = (?)");
             pst.setString(1, user.prof.getpId());
             pst.setString(2, "Confirme");
             rs = pst.executeQuery();
@@ -206,10 +216,13 @@ public class listerRDVProfControler {
             while (rs.next()) {
                 VBox v = new VBox();
                 String id = rs.getString("rId");
-                String date = rs.getString("Date");
-                String etat = rs.getString("Etat");
+                String nom = rs.getString("Nom");
+                String prenom = rs.getString("Prenom");
                 //Button b = new Button("supprimer: " + id );
+                view.setFitHeight(30);
+                view.setPreserveRatio(true);
                 Button b = new Button();
+                b.setPrefSize(10, 10);
                 b.setGraphic(view);
                 b.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -219,7 +232,7 @@ public class listerRDVProfControler {
                     }
                 });
 
-                v.getChildren().addAll( new Label(date), new Label(etat), b);
+                v.getChildren().addAll( new Label(nom), new Label(prenom), b);
                 this.confirme.getChildren().addAll(v);
 
             }
@@ -232,17 +245,22 @@ public class listerRDVProfControler {
         try{
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
-            pst = connection.prepareStatement("select * from rdv where pId = 100 and Etat = (?)");
-            pst.setString(1, "En attente");
+            pst = connection.prepareStatement("select * from rdv join users on rdv.eId = users.uId where pId = (?) and Etat = (?)");
+            pst.setString(1, this.user.prof.getpId());
+            pst.setString(2, "En attente");
+
             rs = pst.executeQuery();
 
             while (rs.next()) {
                 VBox v = new VBox();
                 String id = rs.getString("rId");
-                String date = rs.getString("Date");
-                String etat = rs.getString("Etat");
+                String name = rs.getString("Nom");
+                String prenom = rs.getString("Prenom");
                 //Button b = new Button("accepter: " + id );
+                view.setFitHeight(30);
+                view.setPreserveRatio(true);
                 Button b = new Button();
+                b.setPrefSize(10, 10);
                 b.setGraphic(view);
                 b.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -251,7 +269,13 @@ public class listerRDVProfControler {
                         addRDVenattente();
                     }
                 });
-                Button bb = new Button("refuser : " + id);
+               // Button bb = new Button("refuser : " + id);
+               view.setFitHeight(30);
+                view.setPreserveRatio(true);
+               Button bb = new Button();
+               bb.setPrefSize(10, 10);
+
+               bb.setGraphic(view);
 
                 bb.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -260,7 +284,7 @@ public class listerRDVProfControler {
                         addRDVenattente();
                     }
                 });
-                v.getChildren().addAll( new Label(date), new Label(etat), b, bb);
+                v.getChildren().addAll( new Label(name), new Label(prenom), b, bb);
                 this.vboxRDVAttente.getChildren().addAll(v);
 
             }
@@ -269,8 +293,15 @@ public class listerRDVProfControler {
         catch (Exception e){
             System.out.println(""+e.getMessage());
         }
-        
+        System.out.println("fin");
+    }
+
+    @FXML
+    public void seDeconnecter() throws IOException{
+        Stage stage = main.Main.getStage();
+        main.Main.user = new User();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
     }
 
 }
-
