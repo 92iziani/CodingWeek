@@ -187,6 +187,11 @@ public class AdminPageControllerv2 {
                bb.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent event) {
+                    try {
+                        redirection(id);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println("Professeur modifié !");
                 }
                });
