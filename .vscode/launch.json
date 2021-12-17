@@ -9,6 +9,13 @@
             "name": "Launch Boot",
             "request": "launch",
             "mainClass": "Boot",
+            "projectName": "project-grp26_a5d69050"
+        },
+        {
+            "type": "java",
+            "name": "Launch Boot",
+            "request": "launch",
+            "mainClass": "Boot",
             "projectName": "project-grp26_52cb8eb0"
         },
         {
