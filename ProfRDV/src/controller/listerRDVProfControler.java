@@ -153,9 +153,8 @@ public class listerRDVProfControler implements Initializable{
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
-            pst = connection.prepareStatement("Update rdv set Etat = (?) WHERE rId = (?);");
-            pst.setString(1, "Refuse");
-            pst.setString(2, id);
+            pst = connection.prepareStatement("DELETE FROM rdv WHERE rId = (?);");
+            pst.setString(1, id);
             pst.executeUpdate();
             connection.close();
         } catch (Exception e) {
