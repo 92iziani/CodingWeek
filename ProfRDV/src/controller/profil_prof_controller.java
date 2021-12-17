@@ -197,4 +197,5 @@ public class profil_prof_controller implements Initializable{
             Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/listerdvProf.fxml"));
             stage.setScene(new Scene(fxmlLoader, 600, 500));
         }
+
 }

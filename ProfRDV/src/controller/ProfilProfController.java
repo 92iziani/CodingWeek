@@ -1,12 +1,19 @@
 package controller;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import modele.User;
 
 public class ProfilProfController {
@@ -38,6 +45,9 @@ public class ProfilProfController {
 
     @FXML
     TextField type;
+
+    @FXML
+    Button retour;
 
 
 
@@ -72,7 +82,7 @@ public class ProfilProfController {
     }
 
     public void closeApplication(){
-        System.out.println("haha");
+        Platform.exit();
     }
 
     
@@ -172,5 +182,12 @@ public class ProfilProfController {
     public void id(){
         
     }
+
+    @FXML
+        public void retour() throws IOException{
+            Stage stage = main.Main.getStage();
+            Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/AdminPagev2.fxml"));
+            stage.setScene(new Scene(fxmlLoader, 600, 500));
+        }
 
 }
