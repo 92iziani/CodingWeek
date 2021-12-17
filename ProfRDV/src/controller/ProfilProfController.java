@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modele.User;
@@ -23,6 +24,12 @@ public class ProfilProfController {
     ResultSet rrs;
 
     User user = main.Main.user;
+    
+    @FXML
+    Label nomprenom;
+
+    @FXML
+    Label loginn;
     
     @FXML
     TextField nom;
@@ -65,6 +72,12 @@ public class ProfilProfController {
             email.setText(rrs.getString("Email")); 
             login.setText(rrs.getString("Login")); 
             pass.setText(rrs.getString("Password")); 
+
+
+            while (rrs.next()){
+                this.nomprenom.setText(rrs.getString("Nom")+" "+rs.getString("Prenom"));
+                this.loginn.setText(rrs.getString("Login"));
+            }
 
 
             connection.close();
