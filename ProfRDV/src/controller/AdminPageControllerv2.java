@@ -134,6 +134,7 @@ public class AdminPageControllerv2 {
             
                         pst.executeUpdate();
                         refresh();
+                        clearText();
                         connection2.close();
             
                     } catch (Exception e) {
@@ -147,7 +148,17 @@ public class AdminPageControllerv2 {
         }
    }
 
-   public void refresh(){
+    private void clearText() {
+        id.clear();
+        nom.clear();
+        prenom.clear();
+        type.clear();
+        email.clear();
+        login.clear();
+        password.clear();
+    }
+
+    public void refresh(){
         
         Utilisateurs.getChildren().clear();
 
