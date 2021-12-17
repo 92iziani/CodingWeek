@@ -74,9 +74,9 @@ Mot de passe : password
 L'étudiant peut afficher ses rendez-vous confirmés et ses rendez-vous en attente, il peut également faire une demande de rendez-vous avec un professeur selon ses disponibilités.
 
 - Se connecter en tant que professeur :
-Login : oster21u (par exemple)
-Mot de passe : password
-Le professeur peut annuler les rendez-vous qui'il a confirmé auparavant, accepter ou refuser les nouvelles demande de rendez-vous qui a reçu (rendez-vous en attente), et il peut également définir ses disponibilités/indisponibilités habituelles et inhabituelles.
+* Login : oster21u (par exemple)
+* Mot de passe : password
+* Le professeur peut annuler les rendez-vous qui'il a confirmé auparavant, accepter ou refuser les nouvelles demande de rendez-vous qui a reçu (rendez-vous en attente), et il peut également définir ses disponibilités/indisponibilités habituelles et inhabituelles.
 
 
 
