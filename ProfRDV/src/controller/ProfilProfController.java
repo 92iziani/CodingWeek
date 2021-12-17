@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -24,12 +25,6 @@ public class ProfilProfController {
     ResultSet rrs;
 
     User user = main.Main.user;
-    
-    @FXML
-    Label nomprenom;
-
-    @FXML
-    Label loginn;
     
     @FXML
     TextField nom;
@@ -52,6 +47,8 @@ public class ProfilProfController {
     @FXML
     TextField type;
 
+    @FXML
+    Button retour;
 
 
 
@@ -74,12 +71,6 @@ public class ProfilProfController {
             pass.setText(rrs.getString("Password")); 
 
 
-            while (rrs.next()){
-                this.nomprenom.setText(rrs.getString("Nom")+" "+rs.getString("Prenom"));
-                this.loginn.setText(rrs.getString("Login"));
-            }
-
-
             connection.close();
         }
         catch (Exception e){
@@ -94,7 +85,13 @@ public class ProfilProfController {
         Platform.exit();
     }
 
-
+    @FXML
+    public void seDeconnecter() throws IOException {
+        Stage stage = main.Main.getStage();
+        main.Main.user = new User();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
+    }
 
     
     public void type(){
@@ -190,5 +187,15 @@ public class ProfilProfController {
         }
     }
 
+    public void id(){
+        
+    }
 
+    @FXML
+        public void retour() throws IOException{
+            Stage stage = main.Main.getStage();
+            Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/AdminPagev2.fxml"));
+            stage.setScene(new Scene(fxmlLoader, 600, 500));
+        }
+        
 }

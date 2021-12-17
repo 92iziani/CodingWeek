@@ -71,5 +71,6 @@
          </font>
       </Text>
       <TextField fx:id="pass" layoutX="189.0" layoutY="325.0" onAction="#pass" />
+      <Button fx:id="retour" layoutX="452.0" layoutY="334.0" mnemonicParsing="false" onAction="#retour" prefHeight="24.0" prefWidth="67.0" text="Retour" />
    </children>
 </AnchorPane>
