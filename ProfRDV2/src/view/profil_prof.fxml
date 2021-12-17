@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.profil_prof_controller">
+   <children>
+      <ImageView fitHeight="77.0" fitWidth="200.0" layoutX="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../photo/logo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="close" layoutX="496.0" layoutY="15.0" mnemonicParsing="false" onAction="#closeApplication" prefHeight="26.0" prefWidth="89.0" text="Quitter" />
+      <VBox layoutX="14.0" layoutY="47.0" prefHeight="56.0" prefWidth="120.0" spacing="10.0">
+         <children>
+            <Label fx:id="nomprenom" prefHeight="17.0" prefWidth="165.0" text="Nom" textAlignment="CENTER" />
+            <Label fx:id="loginn" prefHeight="17.0" prefWidth="217.0" text="email" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <Button fx:id="ajouter" layoutX="529.0" layoutY="218.0" mnemonicParsing="false" onAction="#ajouterButton" text="Ajouter" />
+      <ChoiceBox fx:id="jourChoicebox" layoutX="39.0" layoutY="174.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="debutChoicebox" layoutX="214.0" layoutY="174.0" prefWidth="150.0" />
+      <Text layoutX="86.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jour" textAlignment="CENTER" wrappingWidth="56.5" />
+      <Text layoutX="252.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Heure début" wrappingWidth="73.5" />
+      <ChoiceBox fx:id="finChoicebox" layoutX="382.0" layoutY="174.0" prefWidth="150.0" />
+      <Text layoutX="432.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Heure fin" />
+      <Text layoutX="24.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Disponibilités hebdomadaires habituelles :" wrappingWidth="237.5" />
+      <Text layoutX="20.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Disponibilités exceptionnelles :" wrappingWidth="169.21630859375" />
+      <Text layoutX="289.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Indisponibilités exceptionnelles :" wrappingWidth="206.21630859375" />
+      <DatePicker fx:id="disDatepicker" layoutX="20.0" layoutY="287.0" />
+      <DatePicker fx:id="indisDatepicker" layoutX="289.0" layoutY="287.0" />
+      <ChoiceBox fx:id="heureDebutDis" layoutX="20.0" layoutY="327.0" prefHeight="26.0" prefWidth="82.0" />
+      <Button fx:id="close1" layoutX="495.0" layoutY="47.0" mnemonicParsing="false" onAction="#seDeconnecter" prefHeight="26.0" prefWidth="89.0" text="Déconnexion" />
+      <ChoiceBox fx:id="heureFinDis" layoutX="124.0" layoutY="327.0" prefHeight="26.0" prefWidth="82.0" />
+      <ChoiceBox fx:id="heureDebutIndis" layoutX="289.0" layoutY="327.0" prefHeight="26.0" prefWidth="82.0" />
+      <ChoiceBox fx:id="heureFinIndis" layoutX="388.0" layoutY="327.0" prefHeight="26.0" prefWidth="89.0" />
+      <Button fx:id="ajouterDis" layoutX="190.0" layoutY="361.0" mnemonicParsing="false" onAction="#ajouterDisButton" text="Ajouter" />
+      <Button fx:id="ajouterIndis" layoutX="468.0" layoutY="361.0" mnemonicParsing="false" onAction="#ajouterIndisButton" text="Ajouter" />
+      <Button fx:id="retour" layoutX="24.0" layoutY="25.0" mnemonicParsing="false" onAction="#retour" prefHeight="24.0" prefWidth="89.0" text="Retour" />
+   </children>
+</AnchorPane>

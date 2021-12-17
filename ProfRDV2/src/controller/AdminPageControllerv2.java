@@ -30,8 +30,6 @@ public class AdminPageControllerv2 {
     PreparedStatement pst;
     ResultSet rs;
     ResultSet rrs;
-    String cc;
-    int c = 0;
 
     @FXML
     VBox vboxRDVAttente;
@@ -112,8 +110,6 @@ public class AdminPageControllerv2 {
         //System.out.println(id.getText());
     }
 
-    
-
 
     public void ajouter() {
         if (id.getText()!=null && nom.getText()!=null && prenom.getText()!=null && type.getText()!=null && email.getText()!=null && login.getText()!=null && password.getText()!=null){
@@ -124,7 +120,6 @@ public class AdminPageControllerv2 {
                 pst2 = connection.prepareStatement("SELECT * FROM users where uId = (?)");
                 pst2.setString(1, id.getText());
                 ResultSet rs = pst2.executeQuery();
-                
                 if (!rs.next()){
                     try {
                         Connection connection2 = DriverManager.getConnection("jdbc:sqlite:ProfRDV/src/database/data-2.db");
@@ -270,7 +265,6 @@ public class AdminPageControllerv2 {
     catch (Exception e){
         System.out.println(""+e.getMessage());
     }
-
    }
 
    public void redirection(String i) throws IOException {

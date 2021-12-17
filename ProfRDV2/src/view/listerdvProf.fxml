@@ -72,7 +72,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="go" layoutX="55.0" layoutY="338.0" mnemonicParsing="false" onAction="#go" prefHeight="24.0" prefWidth="108.0" text="Disponibilités" />
-      <Button layoutX="488.0" layoutY="61.0" mnemonicParsing="false" onAction="#seDeconnecter" prefHeight="24.0" prefWidth="96.0" text="Se Déconnecter" />
+      <Button fx:id="go" layoutX="52.0" layoutY="329.0" mnemonicParsing="false" onAction="#go" prefHeight="21.0" prefWidth="83.0" text="Change" />
    </children>
 </AnchorPane>
