@@ -22,7 +22,7 @@ Les contributeurs :
 * Ahmed ZIANI (Groupe 2)
 
 
-### Built With
+## Built With
 
 Le programme utilise les technologies suivantes :
 
@@ -31,15 +31,31 @@ Le programme utilise les technologies suivantes :
 * [SQLite](https://www.sqlite.org/)
 
 
-## Comment ça marche ?
+## Comment lancer l'application ?
 
 On va détailler ...
 
-Exemple de commandes :
+Comment nous lançons l'application :
+1. Ouvir le répertoire "project-grp26" (le répertoire dans lequel ce readme est) dans [Visual Studio Code](https://code.visualstudio.com/).
+2. Dans Visual Studio Code, cliquer sur le fichier Boot.java (/ProfRDV/src/Boot.java).
+Visual Studio Code charge alors le projet Java.
+3. Regarder dans l'onglet "JAVA PROJECT" si les dépendances de javaFX et sqlite sont renseignées:
+-Ouvrir le menu déroulant "JAVA PROJECT"
+-Ouvrir le menu déroulant "project-grp26"
+-Ouvrir le menu déroulant "Referenced Libraries"
+Si ce dossier est vide importer (bouton +) dans "Referenced Libraries" les dépendances .jar javaFX et sqlite, disponibles dans le dossier lib, ou téléchargeables ([javaFX](https://gluonhq.com/products/javafx/), [sqlite](http://www.java2s.com/Code/Jar/s/Downloadsqlitejdbc372jar.htm)).
+4. Une fois les dépendances chargés, nous appuyons sur le bouton run (► run Java).
+5. L'application démarre.
 
+Comment vous pouvez lancer l'application : 
+-Via le jar : 
   ```bash
-  java -jar project.jar
+  java --module-path ./lib --add-modules javafx.base,javafx.fxml,javafx.controls,sqlite.jdbc -jar project-grp26.jar
   ```
+-De la même manière que nous
+
+
+## Comment utiliser l'application ?
 
 Pour utiliser l'application :
 
