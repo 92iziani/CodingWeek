@@ -44,8 +44,13 @@ Visual Studio Code charge alors le projet Java.
 -Ouvrir le menu déroulant "project-grp26"
 -Ouvrir le menu déroulant "Referenced Libraries"
 Si ce dossier est vide importer (bouton +) dans "Referenced Libraries" les dépendances .jar javaFX et sqlite, disponibles dans le dossier lib, ou téléchargeables ([javaFX](https://gluonhq.com/products/javafx/), [sqlite](http://www.java2s.com/Code/Jar/s/Downloadsqlitejdbc372jar.htm)).
-4. Une fois les dépendances chargés, nous appuyons sur le bouton run (► run Java).
-5. L'application démarre.
+4. Modifier dans le fichier "launch.json" les lignes :
+```bash
+  "vmArgs": " --module-path %path_to_javafx/lib% --add-modules javafx.controls,javafx.fxml",
+  ```
+En remplaçant "%path_to_javafx/lib%" par le chemin vers le dossier où javaFX est installé.
+5. Une fois les dépendances chargés, nous appuyons sur le bouton run (► run Java).
+6. L'application démarre.
 
 Comment vous pouvez lancer l'application : 
 -Via le jar : 

@@ -8,7 +8,7 @@
             "type": "java",
             "name": "Launch Current File",
             "request": "launch",
-            "vmArgs": " --module-path /Users/axelgoarant/Downloads/javafxPTN/javafx-sdk-17.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": " --module-path ./lib --add-modules javafx.controls,javafx.fxml",
             "mainClass": "${file}"
         },
         {
@@ -16,7 +16,7 @@
             "name": "Launch Boot",
             "request": "launch",
             "mainClass": "Boot",
-            "vmArgs": " --module-path /Users/axelgoarant/Downloads/javafxPTN/javafx-sdk-17.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": " --module-path ./lib --add-modules javafx.controls,javafx.fxml",
             "projectName": "project-grp26_3f16f247"
         },
         {
@@ -24,7 +24,7 @@
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "main.Main",
-            "vmArgs": " --module-path /Users/axelgoarant/Downloads/javafxPTN/javafx-sdk-17.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": " --module-path ./lib --add-modules javafx.controls,javafx.fxml",
             "projectName": "project-grp26_3f16f247"
         }
     ]
