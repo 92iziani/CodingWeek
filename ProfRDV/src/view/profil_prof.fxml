@@ -46,14 +46,14 @@
       <Text layoutX="24.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Disponibilités hebdomadaires habituelles :" wrappingWidth="237.5" />
       <Text layoutX="20.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Disponibilités exceptionnelles :" wrappingWidth="169.21630859375" />
       <Text layoutX="289.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Indisponibilités exceptionnelles :" wrappingWidth="206.21630859375" />
-      <DatePicker layoutX="20.0" layoutY="287.0" />
-      <DatePicker layoutX="289.0" layoutY="287.0" />
-      <ChoiceBox layoutX="20.0" layoutY="327.0" prefHeight="26.0" prefWidth="82.0" />
+      <DatePicker fx:id="disDatepicker" layoutX="20.0" layoutY="287.0" />
+      <DatePicker fx:id="indisDatepicker" layoutX="289.0" layoutY="287.0" />
+      <ChoiceBox fx:id="heureDebutDis" layoutX="20.0" layoutY="327.0" prefHeight="26.0" prefWidth="82.0" />
       <Button fx:id="close1" layoutX="495.0" layoutY="47.0" mnemonicParsing="false" onAction="#closeApplication" prefHeight="26.0" prefWidth="89.0" text="Déconnexion" />
-      <ChoiceBox layoutX="124.0" layoutY="327.0" prefHeight="26.0" prefWidth="82.0" />
-      <ChoiceBox layoutX="289.0" layoutY="327.0" prefHeight="26.0" prefWidth="82.0" />
-      <ChoiceBox layoutX="388.0" layoutY="327.0" prefHeight="26.0" prefWidth="89.0" />
-      <Button layoutX="190.0" layoutY="361.0" mnemonicParsing="false" text="Ajouter" />
-      <Button layoutX="468.0" layoutY="361.0" mnemonicParsing="false" text="Ajouter" />
+      <ChoiceBox fx:id="heureFinDis" layoutX="124.0" layoutY="327.0" prefHeight="26.0" prefWidth="82.0" />
+      <ChoiceBox fx:id="heureDebutIndis" layoutX="289.0" layoutY="327.0" prefHeight="26.0" prefWidth="82.0" />
+      <ChoiceBox fx:id="heureFinIndis" layoutX="388.0" layoutY="327.0" prefHeight="26.0" prefWidth="89.0" />
+      <Button fx:id="ajouterDis" onAction="#ajouterDisButton" layoutX="190.0" layoutY="361.0" mnemonicParsing="false" text="Ajouter" />
+      <Button fx:id="ajouterIndis" onAction="#ajouterIndisButton" layoutX="468.0" layoutY="361.0" mnemonicParsing="false" text="Ajouter" />
    </children>
 </AnchorPane>
