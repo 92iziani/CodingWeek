@@ -21,12 +21,6 @@
          </image>
       </ImageView>
       <Button fx:id="close" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeApplication" text="Quitter" />
-      <MenuButton layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="Outils">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </MenuButton>
       <Text layoutX="46.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Utilisateur" textAlignment="CENTER" wrappingWidth="153.5">
          <font>
             <Font size="18.0" />
