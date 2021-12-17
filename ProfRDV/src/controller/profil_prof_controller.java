@@ -5,6 +5,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -15,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import modele.User;
 
 public class profil_prof_controller implements Initializable{
@@ -34,7 +37,24 @@ public class profil_prof_controller implements Initializable{
     @FXML
     private Button ajouter;
     @FXML
+    private Button ajouterDis;
+    @FXML
+    private Button ajouterIndis;
+    @FXML
     private Button quitterButton;
+    @FXML 
+    private ChoiceBox<String> heureDebutDis;
+    @FXML 
+    private ChoiceBox<String> heureFinDis;
+    @FXML
+    private ChoiceBox<String> heureDebutIndis;
+    @FXML
+    private ChoiceBox<String> heureFinIndis;
+    @FXML
+    private DatePicker disDatepicker;
+    @FXML
+    private DatePicker indisDatepicker;
+
 
 
 
@@ -58,15 +78,23 @@ public class profil_prof_controller implements Initializable{
             if (i%60 == 0){
                 debutChoicebox.getItems().add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
                 finChoicebox.getItems().add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
+                heureDebutDis.getItems().add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
+                heureFinDis.getItems().add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
+                heureDebutIndis.getItems().add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
+                heureFinIndis.getItems().add(String.valueOf(i/60)+":0"+String.valueOf(i%60));
             } else {
                 debutChoicebox.getItems().add(String.valueOf(i/60)+":"+String.valueOf(i%60));
                 finChoicebox.getItems().add(String.valueOf(i/60)+":"+String.valueOf(i%60));
+                heureDebutDis.getItems().add(String.valueOf(i/60)+":"+String.valueOf(i%60));
+                heureFinDis.getItems().add(String.valueOf(i/60)+":"+String.valueOf(i%60));
+                heureDebutIndis.getItems().add(String.valueOf(i/60)+":"+String.valueOf(i%60));
+                heureFinIndis.getItems().add(String.valueOf(i/60)+":"+String.valueOf(i%60));
             }
         }
     }
 
     @FXML
-    private void ajouterButton(ActionEvent e) throws IOException{
+    private void ajouterButton(ActionEvent e) throws IOException {
         if (jourChoicebox.getSelectionModel().getSelectedItem() != null && debutChoicebox.getSelectionModel().getSelectedItem() != null && debutChoicebox.getSelectionModel().getSelectedItem() != null) {
             String jour = jourChoicebox.getSelectionModel().getSelectedItem();
             String debut = debutChoicebox.getSelectionModel().getSelectedItem();
@@ -90,6 +118,71 @@ public class profil_prof_controller implements Initializable{
             dialog.setTitle("ProfRDV de TN");
             dialog.setContentText("Votre disponibilité a été ajoutée !");
             dialog.showAndWait();
-        }   
+        }
+    }
+    
+    @FXML
+    private void ajouterIndisButton(ActionEvent e) throws IOException {
+        if (heureDebutIndis.getSelectionModel().getSelectedItem() != null && heureFinIndis.getSelectionModel().getSelectedItem() != null) {
+            LocalDate date = indisDatepicker.getValue();
+            String jour = localdateToString(date);
+            String debut = heureDebutIndis.getSelectionModel().getSelectedItem();
+            String fin = heureFinIndis.getSelectionModel().getSelectedItem();
+            try {
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
+            String pId =  this.user.prof.getpId();
+            PreparedStatement pst = connection.prepareStatement("insert into exceptionnelle (pid, Date, HeureDebut, HeureFin, Type) values ((?), (?), (?), (?), (?))" );
+            pst.setString(1, pId);
+            pst.setString(2, jour);
+            pst.setString(3, debut);
+            pst.setString(4, fin);
+            pst.setString(5, "Indis");
+            pst.execute();
+            connection.close();
+            }
+            catch (Exception e1){
+                System.out.println(""+e1.getMessage());
+            }
+            Alert dialog = new Alert(AlertType.INFORMATION);
+            dialog.setTitle("ProfRDV de TN");
+            dialog.setContentText("Votre indisponibilité exceptionnelle a été ajoutée !");
+            dialog.showAndWait();
+        }
+    }
+
+    @FXML
+    private void ajouterDisButton(ActionEvent e) throws IOException {
+        if (heureDebutDis.getSelectionModel().getSelectedItem() != null && heureFinDis.getSelectionModel().getSelectedItem() != null) {
+            LocalDate date = disDatepicker.getValue();
+            String jour = localdateToString(date);
+            String debut = heureDebutDis.getSelectionModel().getSelectedItem();
+            String fin = heureFinDis.getSelectionModel().getSelectedItem();
+            try {
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
+                String pId =  this.user.prof.getpId();
+                PreparedStatement pst = connection.prepareStatement("insert into exceptionnelle (pid, Date, HeureDebut, HeureFin, Type) values ((?), (?), (?), (?), (?))" );
+                pst.setString(1, pId);
+                pst.setString(2, jour);
+                pst.setString(3, debut);
+                pst.setString(4, fin);
+                pst.setString(5, "Dis");
+                pst.execute();
+                connection.close();
+            }
+            catch (Exception e1){
+                System.out.println(""+e1.getMessage());
+            }
+            Alert dialog = new Alert(AlertType.INFORMATION);
+            dialog.setTitle("ProfRDV de TN");
+            dialog.setContentText("Votre indisponibilité exceptionnelle a été ajoutée !");
+            dialog.showAndWait();
+        }
+    }
+
+    private String localdateToString(LocalDate date) {
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return formattedDate;
     }
 }
