@@ -68,6 +68,14 @@ public class profil_prof_controller implements Initializable{
     private void closeApplication(ActionEvent e) {
         Platform.exit();
     }
+    
+    @FXML
+    public void seDeconnecter(ActionEvent event) throws IOException {
+        Stage stage = main.Main.getStage();
+        main.Main.user = new User();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
+        stage.setScene(new Scene(fxmlLoader, 600, 500));
+    }
 
 
     // INITIALIZE
@@ -137,7 +145,7 @@ public class profil_prof_controller implements Initializable{
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
             String pId =  this.user.prof.getpId();
-            PreparedStatement pst = connection.prepareStatement("insert into exceptionnelle (pId, Date, HeureDebut, HeureFin, TypeD) values ((?), (?), (?), (?), (?))" );
+            PreparedStatement pst = connection.prepareStatement("insert into exceptionnelle (pid, Date, HeureDebut, HeureFin, Type) values ((?), (?), (?), (?), (?))" );
             pst.setString(1, pId);
             pst.setString(2, jour);
             pst.setString(3, debut);
@@ -167,7 +175,7 @@ public class profil_prof_controller implements Initializable{
                 Class.forName("org.sqlite.JDBC");
                 connection = DriverManager.getConnection( "jdbc:sqlite:ProfRDV/src/database/data-2.db" );
                 String pId =  this.user.prof.getpId();
-                PreparedStatement pst = connection.prepareStatement("insert into exceptionnelle (pId, Date, HeureDebut, HeureFin, TypeD) values ((?), (?), (?), (?), (?))" );
+                PreparedStatement pst = connection.prepareStatement("insert into exceptionnelle (pid, Date, HeureDebut, HeureFin, Type) values ((?), (?), (?), (?), (?))" );
                 pst.setString(1, pId);
                 pst.setString(2, jour);
                 pst.setString(3, debut);
