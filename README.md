@@ -21,6 +21,12 @@ Les contributeurs :
 * Axel GOARANT (Groupe 2)
 * Ahmed ZIANI (Groupe 2)
 
+## Vidéo de démonstration
+
+Cette vidéo non répertoriée sur Youtube présente les fonctionnalités de notre application : 
+
+[https://www.youtube.com/watch?v=12XWNQvzRRU](https://www.youtube.com/watch?v=12XWNQvzRRU)
+
 
 ## Built With
 
